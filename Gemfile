@@ -8,7 +8,8 @@ end
 
 group :test do
   gem 'rspec'
-  gem 'shoulda-matchers'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 gemspec
