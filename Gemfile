@@ -8,6 +8,7 @@ end
 
 group :test do
   gem 'rspec'
+  gem 'shoulda-matchers'
 end
 
 gemspec
