@@ -10,6 +10,7 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'shoulda-callback-matchers'
 end
 
 gemspec
