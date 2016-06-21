@@ -1,15 +1,15 @@
  # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_drop_ship'
-  s.version     = '3.0.1.beta'
+  s.name        = 'solidus_marketplace'
+  s.version     = '0.0.1'
   s.summary     = 'Spree Drop Shipping Extension'
-  s.description = 'Adds drop shipping functionality to Spree stores.'
+  s.description = 'Adds marketplace functionality to Solidus stores.'
   s.required_ruby_version = '>= 2.0.0'
 
-  s.author    = 'Jeff Dutil'
-  s.email     = 'JDutil@BurlingtonWebApps.com'
-  s.homepage  = 'http://github.com/JDutil/spree_drop_ship'
+  s.author    = 'Boomer Digital'
+  s.email     = ''
+  s.homepage  = 'https://github.com/boomerdigital/solidus_marketplace'
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -17,9 +17,9 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'durable_decorator', '~> 0.2.0'
-  s.add_dependency 'spree_api'
-  s.add_dependency 'spree_backend'
-  s.add_dependency 'spree_core',        '~> 3.1.0.beta'
+  s.add_dependency 'solidus_api'
+  s.add_dependency 'solidus_backend'
+  s.add_dependency 'solidus_core'
 
   s.add_development_dependency 'capybara',           '~> 2.2'
   s.add_development_dependency 'coffee-rails'
@@ -32,7 +32,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sass-rails', '~> 5.0.0.beta1'
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'shoulda-matchers'
-  s.add_development_dependency 'spree_auth_devise'
-  s.add_development_dependency 'spree_sample'
+  s.add_development_dependency 'solidus_sample'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'log_buddy'
+  s.add_development_dependency 'awesome_print'
 end

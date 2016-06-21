@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
-group :development, :test do
-  spree_branch = 'master'
-  gem 'spree',                  github: 'spree/spree', branch: spree_branch
-  gem 'spree_auth_devise',      github: 'spree/spree_auth_devise', branch: spree_branch
-end
+
+branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
+gem "solidus", github: "solidusio/solidus", branch: branch
+gem "solidus_auth_devise", github: "solidusio/solidus_auth_devise", branch: branch
 
 gemspec
