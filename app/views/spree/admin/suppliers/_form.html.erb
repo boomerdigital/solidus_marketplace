@@ -40,7 +40,7 @@
       <% end %>
       <%= form.field_container :users, class: ['form-group'] do %>
         <%= form.label :users %><br/>
-        <%= hidden_field_tag 'supplier[user_ids_string]', form.object.user_ids.join(','), class: 'user_picker' %>
+        <%= hidden_field_tag 'supplier[user_ids_string]', form.object.user_ids.join(','), class: 'user_picker fullwidth' %>
       <% end %>
       <%= form.field_container :active, class: ['form-group'] do %>
         <div class="checkbox">

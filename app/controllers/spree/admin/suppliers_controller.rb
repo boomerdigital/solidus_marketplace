@@ -1,7 +1,29 @@
 class Spree::Admin::SuppliersController < Spree::Admin::ResourceController
 
+  def update
+    @object.address = Spree::Address.immutable_merge(@object.address, params[:supplier][:address_attributes])
+
+    if @object.update_attributes(permitted_resource_params.except(:address_attributes))
+      respond_with(@object) do |format|
+        format.html do
+          flash[:success] = flash_message_for(@object, :successfully_updated)
+          redirect_to location_after_save
+        end
+        format.js { render layout: false }
+      end
+    else
+      respond_with(@object) do |format|
+        format.html do
+          flash.now[:error] = @object.errors.full_messages.join(", ")
+          render_after_update_error
+        end
+        format.js { render layout: false }
+      end
+    end
+  end
+
   def edit
-    @object.address = Spree::Address.default unless @object.address.present?
+    @object.address = Spree::Address.build_default unless @object.address.present?
     respond_with(@object) do |format|
       format.html { render :layout => !request.xhr? }
       format.js   { render :layout => false }
@@ -9,7 +31,7 @@ class Spree::Admin::SuppliersController < Spree::Admin::ResourceController
   end
 
   def new
-    @object = Spree::Supplier.new(address_attributes: {country_id: Spree::Address.default.country_id})
+    @object.address = Spree::Address.build_default
   end
 
   private
