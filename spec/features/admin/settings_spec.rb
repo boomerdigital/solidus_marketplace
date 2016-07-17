@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'Admin - DropShip Settings', js: true do
+describe 'Admin - DropShip Settings' do
 
   before do
     login_user create(:admin_user)
 
     visit spree.admin_path
     within '[data-hook=admin_tabs]' do
-      click_link 'Configuration'
+      click_link 'Settings'
     end
     within 'ul[data-hook=admin_configurations_sidebar_menu]' do
       click_link 'Drop Ship Settings'

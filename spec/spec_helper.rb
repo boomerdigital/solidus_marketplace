@@ -31,6 +31,11 @@ RSpec.configure do |config|
   config.include IntegrationHelpers
   config.include Spree::TestingSupport::Preferences
 
+  config.include Warden::Test::Helpers, type: :feature
+  config.include Devise::TestHelpers, type: :controller
+  config.before(:suite) { Warden.test_mode! }
+  config.after(:each) { Warden.test_reset! }
+
   # == URL Helpers
   #
   # Allows access to Spree's routes in specs:
