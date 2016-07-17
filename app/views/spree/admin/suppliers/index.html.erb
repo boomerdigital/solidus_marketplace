@@ -26,8 +26,7 @@
   </div>
 <% end %>
 
-<%# This is a new paginate! %>
-<%= render :partial => 'spree/admin/shared/index_table_options', :locals => { :collection => @collection } %>
+<%= paginate @collection, theme: "solidus_admin" %>
 
 <% if @collection.any? %>
   <table class="table" id="listing_suppliers">
@@ -68,4 +67,4 @@
 <% end %>
 
 <%# This is a new paginate! %>
-<%= render :partial => 'spree/admin/shared/index_table_options', :locals => { :collection => @collection } %>
+<%= paginate @collection, theme: "solidus_admin" %>

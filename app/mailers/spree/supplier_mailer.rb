@@ -1,7 +1,7 @@
 module Spree
   class SupplierMailer < Spree::BaseMailer
 
-    default from: Spree::Store.current.mail_from_address
+    default from: Spree::Store.default.mail_from_address
 
     def welcome(supplier_id)
       @supplier = Supplier.find supplier_id
