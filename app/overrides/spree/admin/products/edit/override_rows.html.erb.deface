@@ -5,7 +5,7 @@
 <td class="image"><%= mini_image product, class: "thumbnail" %></td>
 <td>
   <% if try_spree_current_user && try_spree_current_user.supplier? %>
-    <%= link_to product.try(:name), spree.stock_admin_product_path(product)%>
+    <%= link_to product.try(:name), spree.admin_product_stock_path(product)%>
   <% else %>
     <%= link_to product.try(:name), edit_admin_product_path(product) %>
   <% end %>
@@ -13,7 +13,7 @@
 <td><%= product.display_price.to_html rescue '' %></td>
 <td class="actions" data-hook="admin_products_index_row_actions">
   <% if try_spree_current_user && try_spree_current_user.supplier? %>
-    <%= link_to 'Stock Management', spree.stock_admin_product_path(product), title:'Stock Management', class: 'btn btn-default btn-sm with-tip without-textdecor' if can?(:stock, product) && !product.deleted? %>
+    <%= link_to 'Stock Management', spree.admin_product_stock_path(product), title:'Stock Management', class: 'btn btn-default btn-sm with-tip without-textdecor' if can?(:stock, product) && !product.deleted? %>
   <% else %>
     <%= link_to_edit product, :no_text => true, :class => 'edit' if can?(:edit, product) && !product.deleted? %>
   <% end %>

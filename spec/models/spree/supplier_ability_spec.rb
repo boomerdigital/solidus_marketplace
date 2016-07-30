@@ -30,7 +30,7 @@ describe Spree::SupplierAbility do
         product.add_supplier!(create(:supplier))
         product
       }
-      it_should_behave_like 'access denied'
+      it { ability.should_not be_able_to :read, resource }
     end
 
     context 'requested by suppliers user' do

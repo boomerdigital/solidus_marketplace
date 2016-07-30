@@ -7,6 +7,10 @@ en:
         name: Name
         tax_id: TAX ID
         url: URL
+    models:
+      spree/supplier:
+        one: Supplier
+        other: Suppliers
     errors:
       models:
         spree/supplier:
@@ -16,6 +20,11 @@ en:
               not_responding: 'is invalid, not responding or redirecting to another location'
   spree:
     admin:
+      tab:
+        stock_locations: Stock Locations
+        suppliers: Suppliers
+        shipments: Shipments
+        profile: Profile
       drop_ship_settings:
         update:
           success: Drop ship settings successfully updated.
@@ -35,6 +44,10 @@ en:
     company_info: Company Info
     confirm_order: Confirm Order
     contact_address: Contact Address
+    automatically_deliver_orders_to_supplier: Automatically Deliver Orders To Supplier
+    send_supplier_email: Send Supplier Email
+    default_commission_percentage: Default Commission Percentage
+    default_commission_flat_rate: Default Commission Flat Rate
     drop_ship: Drop Ship
     drop_ship_order_mailer:
       supplier_order:
@@ -46,7 +59,6 @@ en:
     drop_ship_settings: Drop Ship Settings
     editing_supplier: Editing Supplier
     individual: Individual
-    listing_suppliers: Listing Suppliers
     manage: Manage
     must_be_logged_in: 'Must Be Logged In'
     name: Name

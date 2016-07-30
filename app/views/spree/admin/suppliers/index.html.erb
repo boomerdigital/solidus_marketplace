@@ -3,9 +3,7 @@
   <%= button_link_to Spree.t('new_supplier'), new_object_url, icon: 'add', class: 'btn-success' %>
 <% end %>
 
-<% content_for :page_title do %>
-  <%= Spree.t(:listing_suppliers) %>
-<% end %>
+<% admin_breadcrumb(plural_resource_name(Spree::Supplier)) %>
 
 <% content_for :table_filter_title do %>
   <%= Spree.t(:search) %>

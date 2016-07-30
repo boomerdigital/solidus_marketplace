@@ -1,4 +1,4 @@
-<!-- insert_bottom "[data-hook=admin_stock_locations_form_fields]" -->
+<!-- insert_after "[data-hook=admin_stock_locations_form_fields]" -->
 
 <%# Remove extra div and change classes %>
 <% if spree_current_user.admin? %>

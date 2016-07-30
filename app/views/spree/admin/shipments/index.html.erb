@@ -1,6 +1,4 @@
-<% content_for :page_title do %>
-  <%= Spree.t(:listing_shipments) %>
-<% end %>
+<% admin_breadcrumb(plural_resource_name(Spree::Shipment)) %>
 
 <% content_for :table_filter_title do %>
   <%= Spree.t(:search) %>
@@ -49,7 +47,7 @@
 <% end %>
 
 <%# This is a new paginate! %>
-<%= render :partial => 'spree/admin/shared/index_table_options', :locals => { :collection => @shipments } %>
+<%= paginate @shipments, theme: "solidus_admin" %>
 
 <% unless @shipments.empty? %>
   <table class="table" id="listing_shipments" data-hook>
@@ -92,4 +90,4 @@
 <% end %>
 
 <%# This is a new paginate! %>
-<%= render :partial => 'spree/admin/shared/index_table_options', :locals => { :collection => @shipments } %>
+<%= paginate @shipments, theme: "solidus_admin" %>
