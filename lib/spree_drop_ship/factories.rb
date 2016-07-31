@@ -10,16 +10,9 @@ FactoryGirl.define do
 
     after(:create) do |order, evaluator|
       supplier = create(:supplier)
-      product = create(:product)
-      product.add_supplier! supplier
-      # product.stock_items.where(variant_id: product.master.id).first.adjust_count_on_hand(10)
-
-      product_2 = create(:product)
-      product_2.add_supplier! create(:supplier)
-
       create_list(:line_item, evaluator.line_items_count,
         order: order,
-        variant: product_2.master
+        variant: create(:variant, product: create(:product, supplier: create(:supplier)))
       )
       order.line_items.reload
 
@@ -85,9 +78,7 @@ FactoryGirl.define do
   end
 
   factory :variant_with_supplier, parent: :variant do
-    after :create do |variant|
-      variant.product.add_supplier! create(:supplier)
-    end
+    product { create(:product, supplier: create(:supplier)) }
   end
 
 end
