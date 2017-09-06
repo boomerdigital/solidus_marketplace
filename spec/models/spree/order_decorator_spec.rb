@@ -5,7 +5,7 @@ describe Spree::Order do
   context '#finalize_with_drop_ship!' do
 
     after do
-      SpreeDropShip::Config[:send_supplier_email] = true
+      SolidusMarketplace::Config[:send_supplier_email] = true
     end
 
     it 'should deliver drop ship orders when Spree::DropShipConfig[:send_supplier_email] == true' do
@@ -29,7 +29,7 @@ describe Spree::Order do
     end
 
     it 'should NOT deliver drop ship orders when Spree::DropShipConfig[:send_supplier_email] == false' do
-      SpreeDropShip::Config[:send_supplier_email] = false
+      SolidusMarketplace::Config[:send_supplier_email] = false
       order = create(:order_with_totals, ship_address: create(:address))
       order.line_items = [create(:line_item, variant: create(:variant_with_supplier)), create(:line_item, variant: create(:variant_with_supplier))]
       order.create_proposed_shipments

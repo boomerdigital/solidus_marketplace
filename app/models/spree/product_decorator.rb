@@ -23,11 +23,12 @@ Spree::Product.class_eval do
   private
 
   def populate_for_supplier!(supplier)
-    self.supplier = supplier
     variants_including_master.each do |variant|
-      supplier.stock_locations.each { |location| location.set_up_stock_item(variant) }
+      unless variant.suppliers.pluck(:id).include?(supplier.id)
+        variant.suppliers << supplier
+        supplier.stock_locations.each { |location| location.propagate_variant(variant) unless location.stock_item(variant) }
+      end
     end
-    save!
   end
 
 end

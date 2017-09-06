@@ -1,6 +1,6 @@
 Spree::BaseController.class_eval do
 
-  prepend_before_filter :redirect_supplier
+  prepend_before_action :redirect_supplier
 
   private
 

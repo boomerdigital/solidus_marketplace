@@ -1,8 +1,8 @@
-module SpreeDropShip
+module SolidusMarketplace
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree
-    engine_name 'spree_drop_ship'
+    engine_name 'solidus_marketplace'
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -11,15 +11,15 @@ module SpreeDropShip
       g.test_framework :rspec
     end
 
-    initializer 'spree_drop_ship.custom_splitters', after: 'spree.register.stock_splitters' do |app|
+    initializer 'solidus_marketplace.custom_splitters', after: 'spree.register.stock_splitters' do |app|
       app.config.spree.stock_splitters << Spree::Stock::Splitter::DropShip
     end
 
-    initializer "spree_drop_ship.preferences", before: :load_config_initializers  do |app|
-      SpreeDropShip::Config = Spree::DropShipConfiguration.new
+    initializer "solidus_marketplace.preferences", before: :load_config_initializers  do |app|
+      SolidusMarketplace::Config = Spree::DropShipConfiguration.new
     end
 
-    initializer "spree_drop_ship.menu", before: :load_config_initializers  do |app|
+    initializer "solidus_marketplace.menu", before: :load_config_initializers  do |app|
       Spree::Backend::Config.configure do |config|
         config.menu_items << Spree::BackendConfiguration::MenuItem.new(
           [:stock_locations],

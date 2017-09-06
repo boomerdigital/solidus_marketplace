@@ -1,10 +1,8 @@
 Spree::Admin::ProductsController.class_eval do
 
-  before_filter :get_suppliers, only: [:edit, :update]
-  before_filter :supplier_collection, only: [:index]
-
+  before_action :get_suppliers, only: [:edit, :update]
+  before_action :supplier_collection, only: [:index]
   create.after :add_product_to_supplier
-
 
   private
 

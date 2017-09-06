@@ -1,8 +1,8 @@
 module Spree
   Variant.class_eval do
 
-    has_many :suppliers, through: :supplier_variants
     has_many :supplier_variants
+    has_many :suppliers, through: :supplier_variants
 
     before_create :populate_for_suppliers
 

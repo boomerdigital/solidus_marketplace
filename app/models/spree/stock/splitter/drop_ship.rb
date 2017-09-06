@@ -4,10 +4,17 @@ module Spree
       class DropShip < Spree::Stock::Splitter::Base
 
         def split(packages)
+          begin
           split_packages = []
           packages.each do |package|
             # Package fulfilled items together.
-            fulfilled = package.contents.select { |content| content.variant.suppliers.count == 0 }
+            fulfilled = package.contents.select { |content| 
+              begin
+              content.variant.suppliers.count == 0 
+              rescue => e
+                binding.pry
+              end
+            }
             split_packages << build_package(fulfilled)
             # Determine which supplier to package drop shipped items.
             drop_ship = package.contents.select { |content| content.variant.suppliers.count > 0 }
@@ -29,6 +36,9 @@ module Spree
                 split_packages << Spree::Stock::Package.new(stock_location, [content])
               end
             end
+          end
+          rescue => e
+            binding.pry
           end
           return_next split_packages
         end

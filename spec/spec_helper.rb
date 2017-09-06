@@ -24,7 +24,7 @@ require 'spree/testing_support/factories'
 require 'spree/testing_support/preferences'
 require 'spree/testing_support/url_helpers'
 
-require 'spree_drop_ship/factories'
+require 'solidus_marketplace/factories'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

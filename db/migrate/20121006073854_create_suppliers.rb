@@ -1,4 +1,4 @@
-class CreateSuppliers < ActiveRecord::Migration
+class CreateSuppliers < ActiveRecord::Migration[4.2]
 
   def change
     create_table :spree_suppliers do |t|

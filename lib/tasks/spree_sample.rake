@@ -30,8 +30,8 @@ namespace :spree_sample do
 
   desc "Create sample suppliers and randomly link to products"
   task :suppliers => :environment do
-    old_send_value = SpreeDropShip::Config[:send_supplier_email]
-    SpreeDropShip::Config[:send_supplier_email] = false
+    old_send_value = SolidusMarketplace::Config[:send_supplier_email]
+    SolidusMarketplace::Config[:send_supplier_email] = false
 
     @usa = Spree::Country.find_by_iso("US")
     @ca  = @usa.states.find_by_abbr("CA")
@@ -67,6 +67,6 @@ namespace :spree_sample do
     end
     puts
     puts "#{count} products linked."
-    SpreeDropShip::Config[:send_supplier_email] = old_send_value
+    SolidusMarketplace::Config[:send_supplier_email] = old_send_value
   end
 end

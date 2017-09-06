@@ -35,7 +35,7 @@ class Spree::Supplier < Spree::Base
 
   after_create :assign_user
   after_create :create_stock_location
-  after_create :send_welcome, if: -> { SpreeDropShip::Config[:send_supplier_email] }
+  after_create :send_welcome, if: -> { SolidusMarketplace::Config[:send_supplier_email] }
   before_create :set_commission
   before_validation :check_url
 
@@ -107,10 +107,10 @@ class Spree::Supplier < Spree::Base
 
     def set_commission
       unless changes.has_key?(:commission_flat_rate)
-        self.commission_flat_rate = SpreeDropShip::Config[:default_commission_flat_rate]
+        self.commission_flat_rate = SolidusMarketplace::Config[:default_commission_flat_rate]
       end
       unless changes.has_key?(:commission_percentage)
-        self.commission_percentage = SpreeDropShip::Config[:default_commission_percentage]
+        self.commission_percentage = SolidusMarketplace::Config[:default_commission_percentage]
       end
     end
 
