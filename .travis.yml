@@ -5,6 +5,7 @@ script:
   - "export DISPLAY=:99.0"
   - "bundle exec rspec spec"
 rvm:
+  - 2.0.0
+  - 2.1.2
   - 2.1.5
-  - 2.2
 language: ruby
