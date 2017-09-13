@@ -1,7 +1,7 @@
 module Spree
   class DropShipOrderMailer < Spree::BaseMailer
 
-    default from: Spree::Store.current.mail_from_address
+    default from: Spree::Store.default.mail_from_address
 
     def supplier_order(shipment_id)
       @shipment = Shipment.find shipment_id
