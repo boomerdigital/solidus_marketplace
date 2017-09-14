@@ -9,7 +9,7 @@ module IntegrationHelpers
     fill_in 'spree_user[email]', with: user.email
     fill_in 'spree_user[password]', with: options[:password]
     click_button 'Login'
-    page.should_not have_content 'Login'
+    expect(page).to_not have_content 'Login'
   end
 
 end

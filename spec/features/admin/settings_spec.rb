@@ -25,8 +25,8 @@ describe 'Admin - DropShip Settings' do
     # Verify update saved properly by reversing checkboxes or checking field values.
     check 'send_supplier_email'
     click_button 'Update'
-    find_field('default_commission_flat_rate').value.to_f.should eql(0.3)
-    find_field('default_commission_percentage').value.to_f.should eql(10.0)
+    expect(find_field('default_commission_flat_rate').value.to_f).to eql(0.3)
+    expect(find_field('default_commission_percentage').value.to_f).to eql(10.0)
     expect(page).to have_content('Drop ship settings successfully updated.')
   end
 

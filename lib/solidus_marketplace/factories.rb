@@ -4,7 +4,7 @@ FactoryGirl.define do
     bill_address
     ship_address
 
-    ignore do
+    transient do
       line_items_count 5
     end
 
@@ -26,7 +26,7 @@ FactoryGirl.define do
       create(:shipment, order: order, stock_location: supplier.stock_locations.first)
       order.shipments.reload
 
-      order.update!
+      order.recalculate
     end
 
     factory :completed_order_for_drop_ship_with_totals do

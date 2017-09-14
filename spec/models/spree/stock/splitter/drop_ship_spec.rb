@@ -46,7 +46,7 @@ module Spree
           4.times { |i| package.add build(:inventory_unit, variant: variants[i]) }
 
           packages = subject.split([package])
-          packages.count.should eq 3
+          expect(packages.count).to eq 3
 
           expect(packages[0].stock_location).to eq(packer.stock_location)
           expect(packages[0].contents.count).to eq(1)

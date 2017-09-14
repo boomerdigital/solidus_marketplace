@@ -14,18 +14,18 @@ describe Spree::StockLocation do
     context "passes backorderable default config" do
       context "true" do
         before { subject.backorderable_default = true }
-        it { stock_item.backorderable.should be true }
+        it { expect(stock_item.backorderable).to eq true }
       end
 
       context "false" do
         before { subject.backorderable_default = false }
-        it { stock_item.backorderable.should be false }
+        it { expect(stock_item.backorderable).to eq false }
       end
     end
 
     context 'does not propagate for non supplier variants' do
       before { subject.supplier_id = create(:supplier).id }
-      it { stock_item.should be_nil }
+      it { expect(stock_item).to be_nil }
     end
 
   end

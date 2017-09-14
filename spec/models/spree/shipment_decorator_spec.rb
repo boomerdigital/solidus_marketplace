@@ -31,7 +31,7 @@ describe Spree::Shipment do
       shipment = create(:shipment, stock_location: supplier.stock_locations.first)
 
       expect(shipment.supplier_commission.to_f).to eql(0.0)
-      shipment.stub final_price_with_items: 10.0
+      allow(shipment).to receive(:final_price_with_items).and_return(10.0)
       shipment.send(:after_ship)
       expect(shipment.reload.supplier_commission.to_f).to eql(1.5)
     end
@@ -40,7 +40,8 @@ describe Spree::Shipment do
 
   it '#final_price_with_items' do
     shipment = build :shipment
-    shipment.stub item_cost: 50.0, final_price: 5.5
+    allow(shipment).to receive(:item_cost).and_return(50.0)
+    allow(shipment).to receive(:final_price).and_return(5.5)
     expect(shipment.final_price_with_items.to_f).to eql(55.5)
   end
 

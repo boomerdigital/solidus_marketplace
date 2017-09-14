@@ -14,9 +14,9 @@ describe Spree::Supplier do
 
   it '#deleted?' do
     subject.deleted_at = nil
-    subject.deleted_at?.should eql(false)
+    expect(subject.deleted_at?).to eql(false)
     subject.deleted_at = Time.now
-    subject.deleted_at?.should eql(true)
+    expect(subject.deleted_at?).to eql(true)
   end
 
   context '#assign_user' do
@@ -26,7 +26,7 @@ describe Spree::Supplier do
     end
 
     it 'with user' do
-      Spree.user_class.should_not_receive :find_by_email
+      expect(Spree.user_class).to_not receive(:find_by_email)
       @instance.email = 'test@test.com'
       @instance.users << create(:user)
       @instance.save
@@ -34,20 +34,20 @@ describe Spree::Supplier do
 
     it 'with existing user email' do
       user = create(:user, email: 'test@test.com')
-      Spree.user_class.should_receive(:find_by_email).with(user.email).and_return(user)
+      expect(Spree.user_class).to receive(:find_by_email).with(user.email).and_return(user)
       @instance.email = user.email
       @instance.save
-      @instance.reload.users.first.should eql(user)
+      expect(@instance.reload.users.first).to eql(user)
     end
 
   end
 
   it '#create_stock_location' do
-    Spree::StockLocation.count.should eql(0)
+    expect(Spree::StockLocation.count).to eql(0)
     supplier = create :supplier
-    Spree::StockLocation.first.active.should be true
-    Spree::StockLocation.first.country.should eql(supplier.address.country)
-    Spree::StockLocation.first.supplier.should eql(supplier)
+    expect(Spree::StockLocation.first.active).to be true
+    expect(Spree::StockLocation.first.country).to eql(supplier.address.country)
+    expect(Spree::StockLocation.first.supplier).to eql(supplier)
   end
 
   context '#send_welcome' do
@@ -66,7 +66,7 @@ describe Spree::Supplier do
       it 'should not send' do
         SolidusMarketplace::Config[:send_supplier_email] = false
         expect {
-          Spree::SupplierMailer.should_not_receive(:welcome).with(an_instance_of(Integer))
+          expect(Spree::SupplierMailer).to_not receive(:welcome).with(an_instance_of(Integer))
         }
         @instance.save
       end
@@ -77,7 +77,7 @@ describe Spree::Supplier do
 
       it 'should send welcome email' do
         expect {
-          Spree::SupplierMailer.should_receive(:welcome).with(an_instance_of(Integer))
+          expect(Spree::SupplierMailer).to receive(:welcome).with(an_instance_of(Integer))
         }
         @instance.save
       end
@@ -93,12 +93,12 @@ describe Spree::Supplier do
     SolidusMarketplace::Config.set default_commission_flat_rate: 0
     SolidusMarketplace::Config.set default_commission_percentage: 0
     # Default configuration is 0.0 for each.
-    supplier.commission_flat_rate.to_f.should eql(1.0)
-    supplier.commission_percentage.to_f.should eql(1.0)
+    expect(supplier.commission_flat_rate.to_f).to eql(1.0)
+    expect(supplier.commission_percentage.to_f).to eql(1.0)
     # With custom commission applied.
     supplier = create :supplier, commission_flat_rate: 123, commission_percentage: 25
-    supplier.commission_flat_rate.should eql(123.0)
-    supplier.commission_percentage.should eql(25.0)
+    expect(supplier.commission_flat_rate).to eql(123.0)
+    expect(supplier.commission_percentage).to eql(25.0)
   end
 
   describe '#shipments' do

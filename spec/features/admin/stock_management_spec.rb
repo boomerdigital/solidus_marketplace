@@ -36,21 +36,21 @@ describe "Stock Management", js: true do
 
         it "should not show deleted stock_items" do
           within(:css, '.stock_location_info') do
-            page.should have_content(@user.supplier.name)
-            page.should_not have_content('Secondary')
+            expect(page).to have_content(@user.supplier.name)
+            expect(page).to_not have_content('Secondary')
           end
         end
 
         it "can toggle backorderable for a variant's stock item", js: true do
           backorderable = find(".stock_item_backorderable")
-          backorderable.should_not be_checked
+          expect(backorderable).to_not be_checked
 
           backorderable.set(true)
 
           visit current_path
 
           backorderable = find(".stock_item_backorderable")
-          backorderable.should be_checked
+          expect(backorderable).to be_checked
         end
 
         # Regression test for #2896
@@ -66,7 +66,7 @@ describe "Stock Management", js: true do
           # Wait for API request to complete.
           sleep(1)
 
-          page.current_url.should include("/admin/products")
+          expect(page.current_url).to include("/admin/products")
         end
 
         it "can create a new stock movement", js: true do
@@ -74,9 +74,9 @@ describe "Stock Management", js: true do
           select2 @user.supplier.name, from: "Stock Location"
           click_button "Add Stock"
 
-          page.should have_content('successfully created')
+          expect(page).to have_content('successfully created')
           within(:css, '.stock_location_info table') do
-            column_text(2).should eq '15'
+            expect(column_text(2)).to eq '15'
           end
         end
 
@@ -85,10 +85,10 @@ describe "Stock Management", js: true do
           select2 @user.supplier.name, from: "Stock Location"
           click_button "Add Stock"
 
-          page.should have_content('successfully created')
+          expect(page).to have_content('successfully created')
 
           within(:css, '.stock_location_info table') do
-            column_text(2).should eq '5'
+            expect(column_text(2)).to eq '5'
           end
         end
 
@@ -97,10 +97,10 @@ describe "Stock Management", js: true do
           select2 @user.supplier.name, from: "Stock Location"
           click_button "Add Stock"
 
-          page.should have_content('successfully created')
+          expect(page).to have_content('successfully created')
 
           within(:css, '.stock_location_info table') do
-            column_text(2).should eq '5'
+            expect(column_text(2)).to eq '5'
           end
         end
       end
@@ -127,7 +127,7 @@ describe "Stock Management", js: true do
           select2 "SPREEC", from: "Variant"
           click_button "Add Stock"
 
-          page.should have_content('successfully created')
+          expect(page).to have_content('successfully created')
         end
       end
     end
@@ -148,8 +148,8 @@ describe "Stock Management", js: true do
       end
 
       it "redirects to stock locations page" do
-        page.should have_content(Spree.t(:stock_management_requires_a_stock_location))
-        page.current_url.should include("admin/stock_locations")
+        expect(page).to have_content(Spree.t(:stock_management_requires_a_stock_location))
+        expect(page.current_url).to include("admin/stock_locations")
       end
     end
   end

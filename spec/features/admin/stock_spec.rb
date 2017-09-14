@@ -17,9 +17,9 @@ feature 'Admin - Product Stock Management', js: true do
       visit spree.stock_admin_product_path(@product)
 
       within '.stock_location_info' do
-        page.should have_content(@supplier1.name)
+        expect(page).to have_content(@supplier1.name)
         # Stock item doesn't exist
-        page.should_not have_content(@supplier2.name)
+        expect(page).to_not have_content(@supplier2.name)
       end
     end
 
@@ -37,8 +37,8 @@ feature 'Admin - Product Stock Management', js: true do
       visit spree.stock_admin_product_path(@product)
 
       within '.stock_location_info' do
-        page.should have_content(@supplier1.name)
-        page.should_not have_content(@supplier2.name)
+        expect(page).to have_content(@supplier1.name)
+        expect(page).to_not have_content(@supplier2.name)
       end
     end
 
@@ -48,49 +48,49 @@ feature 'Admin - Product Stock Management', js: true do
       check "Active"
       click_button "Create"
 
-      page.should have_content("successfully created")
-      page.should have_content("London")
+      expect(page).to have_content("successfully created")
+      expect(page).to have_content("London")
     end
 
     scenario "can delete an existing stock location", js: true do
       create(:stock_location, supplier: @user.supplier)
       visit current_path
 
-      find('#listing_stock_locations').should have_content("NY Warehouse")
+      expect(find('#listing_stock_locations')).to have_content("NY Warehouse")
       within_row(2) { click_icon :delete }
       page.driver.browser.switch_to.alert.accept
       # Wait for API request to complete.
       sleep(1)
       visit current_path
 
-      find('#listing_stock_locations').should_not have_content("NY Warehouse")
+      expect(find('#listing_stock_locations')).to_not have_content("NY Warehouse")
     end
 
     scenario "can update an existing stock location" do
       create(:stock_location, supplier: @user.supplier)
       visit current_path
 
-      page.should have_content("Big Store")
+      expect(page).to have_content("Big Store")
 
       within_row(1) { click_icon :edit }
       fill_in "Name", with: "London"
       click_button "Update"
 
-      page.should have_content("successfully updated")
-      page.should have_content("London")
+      expexct(page).to have_content("successfully updated")
+      expect(page).to have_content("London")
     end
 
     scenario "can deactivate an existing stock location" do
       create(:stock_location, supplier: @user.supplier)
       visit current_path
 
-      page.should have_content("Big Store")
+      expect(page).to have_content("Big Store")
 
       within_row(1) { click_icon :edit }
       uncheck "Active"
       click_button "Update"
 
-      find('#listing_stock_locations').should have_content("Inactive")
+      expect(find('#listing_stock_locations')).to have_content("Inactive")
     end
 
   end

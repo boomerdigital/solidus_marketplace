@@ -16,7 +16,7 @@ feature 'Admin - Suppliers', js: true do
       within '[data-hook=admin_tabs]' do
         click_link 'Suppliers'
       end
-      page.should have_content('Listing Suppliers')
+      expect(page).to have_content('Listing Suppliers')
     end
 
     scenario 'should be able to create new supplier' do
@@ -36,14 +36,14 @@ feature 'Admin - Suppliers', js: true do
       select2 'Vermont', from: 'State'
       fill_in 'supplier[address_attributes][phone]', with: '555-555-5555'
       click_button 'Create'
-      page.should have_content('Supplier "Test Supplier" has been successfully created!')
+      expect(page).to have_content('Supplier "Test Supplier" has been successfully created!')
     end
 
     scenario 'should be able to delete supplier' do
       click_icon 'delete'
       page.driver.browser.switch_to.alert.accept
       within 'table' do
-        page.should_not have_content(@supplier.name)
+        expect(page).to_not have_content(@supplier.name)
       end
     end
 
@@ -64,7 +64,7 @@ feature 'Admin - Suppliers', js: true do
       select2 'Vermont', from: 'State'
       fill_in 'supplier[address_attributes][phone]', with: '555-555-5555'
       click_button 'Update'
-      page.should have_content('Supplier "Test Supplier" has been successfully updated!')
+      expect(page).to have_content('Supplier "Test Supplier" has been successfully updated!')
     end
 
   end
@@ -78,13 +78,13 @@ feature 'Admin - Suppliers', js: true do
 
     scenario 'should only see tabs they have access to' do
       within '[data-hook=admin_tabs]' do
-        page.should_not have_link('Overview')
-        page.should have_link('Products')
-        page.should_not have_link('Reports')
-        page.should_not have_link('Configuration')
-        page.should_not have_link('Promotions')
-        page.should_not have_link('Suppliers')
-        page.should have_link('Shipments')
+        expect(page).to_not have_link('Overview')
+        expect(page).to have_link('Products')
+        expect(page).to_not have_link('Reports')
+        expect(page).to_not have_link('Configuration')
+        expect(page).to_not have_link('Promotions')
+        expect(page).to_not have_link('Suppliers')
+        expect(page).to have_link('Shipments')
       end
     end
 
@@ -100,14 +100,14 @@ feature 'Admin - Suppliers', js: true do
       select2 'United States', from: 'Country'
       select2 'Vermont', from: 'State'
       fill_in 'supplier[address_attributes][phone]', with: '555-555-5555'
-      page.should_not have_css('#supplier_active') # cannot edit active
-      page.should_not have_css('#supplier_featured') # cannot edit featured
-      page.should_not have_css('#s2id_supplier_user_ids') # cannot edit assigned users
-      page.should_not have_css('#supplier_commission_flat_rate') # cannot edit flat rate commission
-      page.should_not have_css('#supplier_commission_percentage') # cannot edit comission percentage
+      expect(page).to_not have_css('#supplier_active') # cannot edit active
+      expect(page).to_not have_css('#supplier_featured') # cannot edit featured
+      expect(page).to_not have_css('#s2id_supplier_user_ids') # cannot edit assigned users
+      expect(page).to_not have_css('#supplier_commission_flat_rate') # cannot edit flat rate commission
+      expect(page).to_not have_css('#supplier_commission_percentage') # cannot edit comission percentage
       click_button 'Update'
-      page.should have_content('Supplier "Test Supplier" has been successfully updated!')
-      page.current_path.should eql(spree.edit_admin_supplier_path(@user.reload.supplier))
+      expect(page).to have_content('Supplier "Test Supplier" has been successfully updated!')
+      expect(page.current_path).to eql(spree.edit_admin_supplier_path(@user.reload.supplier))
     end
 
   end
@@ -118,7 +118,7 @@ feature 'Admin - Suppliers', js: true do
       supplier = create(:supplier)
       login_user create(:user)
       visit spree.edit_admin_supplier_path(supplier)
-      page.should have_content('Authorization Failure')
+      expect(page).to have_content('Authorization Failure')
     end
 
   end

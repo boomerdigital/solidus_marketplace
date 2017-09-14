@@ -22,7 +22,7 @@ describe 'Admin - Shipments', js: true do
       # Add product and update shipment
       order.contents.add(product.master, 2)
       shipment.refresh_rates
-      shipment.update!(order)
+      shipment.update_state!(order)
       shipment.update_amounts
 
       # TODO this is a hack until capture_on_dispatch finished https://github.com/spree/spree/issues/4727
@@ -47,7 +47,7 @@ describe 'Admin - Shipments', js: true do
         end
         wait_for_ajax
         within '.table tr.show-tracking' do
-          page.should have_content("Tracking: FOOBAR")
+          expect(page).to have_content("Tracking: FOOBAR")
         end
       end
 
@@ -59,21 +59,21 @@ describe 'Admin - Shipments', js: true do
         click_icon :save
         wait_for_ajax
 
-        page.should have_content("Default $0.00")
+        expect(page).to have_content("Default $0.00")
       end
 
       it "can ship a completed order" do
         click_on "Ship"
         wait_for_ajax
 
-        page.should have_content("shipped package")
-        order.reload.shipment_state.should == "shipped"
+        expect(page).to have_content("shipped package")
+        expect(order.reload.shipment_state).to eq "shipped"
       end
     end
 
     it 'should render unauthorized visiting another suppliers shipment' do
       visit spree.edit_admin_shipment_path(create(:shipment))
-      page.should have_content('Authorization Failure')
+      expect(page).to have_content('Authorization Failure')
     end
   end
 

@@ -14,17 +14,17 @@ describe Spree::Order do
       order.create_proposed_shipments
 
       order.shipments.each do |shipment|
-        Spree::DropShipOrderMailer.should_receive(:supplier_order).with(shipment.id).and_return(double(Mail, :deliver! => true))
+        expect(Spree::DropShipOrderMailer).to receive(:supplier_order).with(shipment.id).and_return(double(Mail, :deliver! => true))
       end
 
       order.finalize!
       order.reload
 
       # Check orders are properly split.
-      order.shipments.size.should eql(2)
+      expect(order.shipments.size).to eql(2)
       order.shipments.each do |shipment|
-        shipment.line_items.size.should eql(1)
-        shipment.line_items.first.variant.suppliers.first.should eql(shipment.supplier)
+        expect(shipment.line_items.size).to eql(1)
+        expect(shipment.line_items.first.variant.suppliers.first).to eql(shipment.supplier)
       end
     end
 
@@ -35,17 +35,17 @@ describe Spree::Order do
       order.create_proposed_shipments
 
       order.shipments.each do |shipment|
-        Spree::DropShipOrderMailer.should_not_receive(:supplier_order).with(shipment.id)
+        expect(Spree::DropShipOrderMailer).not_to receive(:supplier_order).with(shipment.id)
       end
 
       order.finalize!
       order.reload
 
       # Check orders are properly split.
-      order.shipments.size.should eql(2)
+      expect(order.shipments.size).to eql(2)
       order.shipments.each do |shipment|
-        shipment.line_items.size.should eql(1)
-        shipment.line_items.first.variant.suppliers.first.should eql(shipment.supplier)
+        expect(shipment.line_items.size).to eql(1)
+        expect(shipment.line_items.first.variant.suppliers.first).to eql(shipment.supplier)
       end
     end
 
