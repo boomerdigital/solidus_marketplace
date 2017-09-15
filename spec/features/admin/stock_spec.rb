@@ -76,7 +76,7 @@ feature 'Admin - Product Stock Management', js: true do
       fill_in "Name", with: "London"
       click_button "Update"
 
-      expexct(page).to have_content("successfully updated")
+      expect(page).to have_content("successfully updated")
       expect(page).to have_content("London")
     end
 
