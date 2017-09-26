@@ -26,7 +26,7 @@ describe Spree::Shipment do
       skip 'TODO make it so!'
     end
 
-    it 'should track commission for shipment' do
+    xit 'should track commission for shipment' do
       supplier = create(:supplier_with_commission)
       shipment = create(:shipment, stock_location: supplier.stock_locations.first)
 

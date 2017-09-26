@@ -8,4 +8,8 @@ Spree.user_class.class_eval do
     supplier.present?
   end
 
+  def has_admin_role?
+    spree_roles.map(&:name).include?("admin")
+  end
+
 end

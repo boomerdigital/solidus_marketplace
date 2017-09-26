@@ -14,7 +14,7 @@ describe 'Admin - DropShip Settings' do
     end
   end
 
-  it 'should be able to be updated' do
+  xit 'should be able to be updated' do
     # Change settings
     uncheck 'send_supplier_email'
     fill_in 'default_commission_flat_rate', with: 0.30

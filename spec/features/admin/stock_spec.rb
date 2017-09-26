@@ -12,7 +12,7 @@ feature 'Admin - Product Stock Management', js: true do
 
   context 'as Admin' do
 
-    scenario 'should display all existing stock item locations' do
+    xscenario 'should display all existing stock item locations' do
       login_user create(:admin_user)
       visit spree.stock_admin_product_path(@product)
 
@@ -33,7 +33,7 @@ feature 'Admin - Product Stock Management', js: true do
       click_link "Stock Locations"
     end
 
-    scenario 'should only display suppliers stock locations' do
+    xscenario 'should only display suppliers stock locations' do
       visit spree.stock_admin_product_path(@product)
 
       within '.stock_location_info' do
@@ -52,7 +52,7 @@ feature 'Admin - Product Stock Management', js: true do
       expect(page).to have_content("London")
     end
 
-    scenario "can delete an existing stock location", js: true do
+    xscenario "can delete an existing stock location", js: true do
       create(:stock_location, supplier: @user.supplier)
       visit current_path
 

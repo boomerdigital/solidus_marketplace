@@ -8,10 +8,19 @@ describe Spree.user_class do
 
   let(:user) { build :user }
 
-  it '#supplier?' do
-    expect(user.supplier?).to eq false
-    user.supplier = build :supplier
-    expect(user.supplier?).to eq true
+  describe '#supplier?' do
+    it "returns true if user is a supplier" do
+      user.supplier = build :supplier
+      expect(user.supplier?).to eq true
+    end
+
+    it "returns false if user is not a supplier" do
+      expect(user.supplier?).to eq false
+    end
+  end
+
+  describe "#has_admin_role?" do
+    it "returns true if user is an admin"
   end
 
 end

@@ -34,14 +34,14 @@ describe "Stock Management", js: true do
           end
         end
 
-        it "should not show deleted stock_items" do
+        xit "should not show deleted stock_items" do
           within(:css, '.stock_location_info') do
             expect(page).to have_content(@user.supplier.name)
             expect(page).to_not have_content('Secondary')
           end
         end
 
-        it "can toggle backorderable for a variant's stock item", js: true do
+        xit "can toggle backorderable for a variant's stock item", js: true do
           backorderable = find(".stock_item_backorderable")
           expect(backorderable).to_not be_checked
 
@@ -57,7 +57,7 @@ describe "Stock Management", js: true do
         # The regression was that unchecking the last checkbox caused a redirect
         # to happen. By ensuring that we're still on an /admin/products URL, we
         # assert that the redirect is *not* happening.
-        it "can toggle backorderable for the second variant stock item", js: true do
+        xit "can toggle backorderable for the second variant stock item", js: true do
           new_location = create(:stock_location, name: "Another Location", supplier: @user.supplier)
           visit page.current_path
 
@@ -69,7 +69,7 @@ describe "Stock Management", js: true do
           expect(page.current_url).to include("/admin/products")
         end
 
-        it "can create a new stock movement", js: true do
+        xit "can create a new stock movement", js: true do
           fill_in "stock_movement_quantity", with: 5
           select2 @user.supplier.name, from: "Stock Location"
           click_button "Add Stock"
@@ -80,7 +80,7 @@ describe "Stock Management", js: true do
           end
         end
 
-        it "can create a new negative stock movement", js: true do
+        xit "can create a new negative stock movement", js: true do
           fill_in "stock_movement_quantity", with: -5
           select2 @user.supplier.name, from: "Stock Location"
           click_button "Add Stock"
@@ -92,7 +92,7 @@ describe "Stock Management", js: true do
           end
         end
 
-        it "can create a new negative stock movement", js: true do
+        xit "can create a new negative stock movement", js: true do
           fill_in "stock_movement_quantity", with: -5
           select2 @user.supplier.name, from: "Stock Location"
           click_button "Add Stock"
@@ -122,7 +122,7 @@ describe "Stock Management", js: true do
           end
         end
 
-        it "can create a new stock movement for the specified variant", js: true do
+        xit "can create a new stock movement for the specified variant", js: true do
           fill_in "stock_movement_quantity", with: 10
           select2 "SPREEC", from: "Variant"
           click_button "Add Stock"
@@ -147,7 +147,7 @@ describe "Stock Management", js: true do
         click_link @product.name
       end
 
-      it "redirects to stock locations page" do
+      xit "redirects to stock locations page" do
         expect(page).to have_content(Spree.t(:stock_management_requires_a_stock_location))
         expect(page.current_url).to include("admin/stock_locations")
       end

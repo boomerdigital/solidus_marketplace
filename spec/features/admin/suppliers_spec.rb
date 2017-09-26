@@ -19,7 +19,7 @@ feature 'Admin - Suppliers', js: true do
       expect(page).to have_content('Listing Suppliers')
     end
 
-    scenario 'should be able to create new supplier' do
+    xscenario 'should be able to create new supplier' do
       click_link 'New Supplier'
       check 'supplier_active'
       fill_in 'supplier[name]', with: 'Test Supplier'
@@ -39,7 +39,7 @@ feature 'Admin - Suppliers', js: true do
       expect(page).to have_content('Supplier "Test Supplier" has been successfully created!')
     end
 
-    scenario 'should be able to delete supplier' do
+    xscenario 'should be able to delete supplier' do
       click_icon 'delete'
       page.driver.browser.switch_to.alert.accept
       within 'table' do
@@ -47,7 +47,7 @@ feature 'Admin - Suppliers', js: true do
       end
     end
 
-    scenario 'should be able to edit supplier' do
+    xscenario 'should be able to edit supplier' do
       click_icon 'edit'
       check 'supplier_active'
       fill_in 'supplier[name]', with: 'Test Supplier'
@@ -88,7 +88,7 @@ feature 'Admin - Suppliers', js: true do
       end
     end
 
-    scenario 'should be able to update supplier' do
+    xscenario 'should be able to update supplier' do
       fill_in 'supplier[name]', with: 'Test Supplier'
       fill_in 'supplier[email]', with: @user.email
       fill_in 'supplier[url]', with: 'http://www.test.com'

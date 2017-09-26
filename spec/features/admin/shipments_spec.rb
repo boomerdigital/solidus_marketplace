@@ -37,7 +37,7 @@ describe 'Admin - Shipments', js: true do
 
     context 'edit page' do
 
-      it "can add tracking information" do
+      xit "can add tracking information" do
         within '.table tr.show-tracking' do
           click_icon :edit
         end
@@ -51,7 +51,7 @@ describe 'Admin - Shipments', js: true do
         end
       end
 
-      it "can change the shipping method" do
+      xit "can change the shipping method" do
         within(".table tr.show-method") do
           click_icon :edit
         end
@@ -62,7 +62,7 @@ describe 'Admin - Shipments', js: true do
         expect(page).to have_content("Default $0.00")
       end
 
-      it "can ship a completed order" do
+      xit "can ship a completed order" do
         click_on "Ship"
         wait_for_ajax
 
@@ -71,7 +71,7 @@ describe 'Admin - Shipments', js: true do
       end
     end
 
-    it 'should render unauthorized visiting another suppliers shipment' do
+    xit 'should render unauthorized visiting another suppliers shipment' do
       visit spree.edit_admin_shipment_path(create(:shipment))
       expect(page).to have_content('Authorization Failure')
     end
