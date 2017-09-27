@@ -15,7 +15,7 @@ Spree::Product.class_eval do
     end
   end
 
-  # Returns true if the product has a drop shipping supplier.
+  # Returns true if the product has one or more suppliers.
   def supplier?
     suppliers.present?
   end
