@@ -36,4 +36,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'log_buddy'
   s.add_development_dependency 'awesome_print'
+  s.add_development_dependency 'pry'
 end
