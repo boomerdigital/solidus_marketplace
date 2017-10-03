@@ -1,6 +1,6 @@
 Spree::Product.class_eval do
 
-  has_many :suppliers, through: :master
+  has_many :suppliers, -> { readonly }, through: :master
 
   scope :of_supplier, -> (supplier_id) { joins(:suppliers).where('spree_suppliers.id = ?', supplier_id) }
 
@@ -12,6 +12,12 @@ Spree::Product.class_eval do
   def add_suppliers!(supplier_ids)
     Spree::Supplier.where(id: supplier_ids).each do |supplier|
       populate_for_supplier! supplier
+    end
+  end
+
+  def remove_suppliers!(supplier_ids)
+    Spree::Supplier.where(id: supplier_ids).each do |supplier|
+      unpopulate_for_supplier! supplier
     end
   end
 
@@ -27,6 +33,18 @@ Spree::Product.class_eval do
       unless variant.suppliers.pluck(:id).include?(supplier.id)
         variant.suppliers << supplier
         supplier.stock_locations.each { |location| location.propagate_variant(variant) unless location.stock_item(variant) }
+      end
+    end
+  end
+
+  def unpopulate_for_supplier!(supplier)
+    variants_including_master.each do |variant|
+      if variant.suppliers.pluck(:id).include?(supplier.id)
+        variant.suppliers.delete(supplier)
+
+        supplier.stock_locations.each do |location|
+          location.unpropagate_variant(variant)
+        end
       end
     end
   end

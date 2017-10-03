@@ -6,4 +6,8 @@ Spree::Core::Engine.routes.draw do
     resources :suppliers
   end
 
+  namespace :api do
+    resources :suppliers, only: :index
+  end
+
 end

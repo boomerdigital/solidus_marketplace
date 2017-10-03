@@ -1,0 +1,1 @@
+Spree::Role.where(name: "supplier_admin").first_or_create

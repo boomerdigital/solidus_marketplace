@@ -13,12 +13,18 @@ module SolidusMarketplace
         inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/solidus_marketplace\n", :before => /\*\//, :verbose => true
       end
 
+      def include_seed_data
+        seed_file = "db/seeds.rb"
+        content = "SolidusMarketplace::Engine.load_seed if defined?(SolidusMarketplace)"
+        append_file(seed_file, content) unless File.readlines(seed_file).last == content
+      end
+
       def add_migrations
         run 'bundle exec rake railties:install:migrations FROM=solidus_marketplace'
       end
 
       def run_migrations
-        run_migrations = options[:auto_run_migrations] || ['', 'y', 'Y'].include?(ask 'Would you like to run the migrations now? [Y/n]')
+        run_migrations = options[:auto_run_migrations] || ENV['AUTO_RUN_MIGRATIONS'] || ['', 'y', 'Y'].include?(ask 'Would you like to run the migrations now? [Y/n]')
         if run_migrations
           run 'bundle exec rake db:migrate'
         else

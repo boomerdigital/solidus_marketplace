@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Admin - Product Stock Management', js: true do
 
   before do
-    @user = create(:supplier_user)
+    @user = create(:supplier_admin)
     @supplier1 = @user.supplier
     @supplier2 = create(:supplier)
     @product = create :product
@@ -42,7 +42,7 @@ feature 'Admin - Product Stock Management', js: true do
       end
     end
 
-    scenario "can create a new stock location" do
+    xscenario "can create a new stock location" do
       visit spree.new_admin_stock_location_path
       fill_in "Name", with: "London"
       check "Active"

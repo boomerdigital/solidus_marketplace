@@ -9,11 +9,11 @@ Spree.user_class.class_eval do
   end
 
   def supplier_admin?
-    supplier? && has_admin_role?
+    spree_roles.map(&:name).include?("supplier_admin")
   end
 
   def market_maker?
-    !supplier? && has_admin_role?
+    has_admin_role?
   end
 
   def has_admin_role?

@@ -84,6 +84,18 @@ FactoryGirl.define do
     supplier
   end
 
+  factory :supplier_admin_role, parent: :role do
+    name "supplier_admin"
+  end
+
+  factory :supplier_admin, parent: :user do
+    supplier
+
+    after :create do |user|
+      user.spree_roles << create(:supplier_admin_role)
+    end
+  end
+
   factory :variant_with_supplier, parent: :variant do
     after :create do |variant|
       variant.product.add_supplier! create(:supplier)

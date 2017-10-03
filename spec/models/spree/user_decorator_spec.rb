@@ -8,6 +8,7 @@ describe Spree.user_class do
 
   let(:user) { build :user }
   let(:admin_role) { build :admin_role }
+  let(:supplier_admin_role) { build :role, name: "supplier_admin" }
 
   describe '#supplier?' do
     it "returns true if user is a supplier" do
@@ -21,57 +22,24 @@ describe Spree.user_class do
   end
 
   describe '#supplier_admin?' do
-    context "when user is a supplier" do
-      before(:each) do
-        user.supplier = build :supplier
-      end
-
-      it "returns true if user has admin role" do
-        user.spree_roles << admin_role
-        expect(user.supplier_admin?).to eq true
-      end
-
-      it "returns false if user doesn't have an admin role" do
-        expect(user.supplier_admin?).to eq false
-      end
+    it "returns true if user has supplier admin role" do
+      user.spree_roles << supplier_admin_role
+      expect(user.supplier_admin?).to eq true
     end
 
-    context "when user is not a supplier" do
-      it "returns false if user has admin role" do
-        user.spree_roles << admin_role
-        expect(user.supplier_admin?).to eq false
-      end
-
-      it "returns false if user doesn't have admin role" do
-        expect(user.supplier_admin?).to eq false
-      end
+    it "returns false if user doesn't have a supplier admin role" do
+      expect(user.supplier_admin?).to eq false
     end
   end
 
   describe '#market_maker?' do
-    context "when user is a supplier" do
-      it "returns false if user has an admin role" do
-        user.spree_roles << admin_role
-        user.supplier = build :supplier
-        expect(user.market_maker?).to eq false
-      end
-
-      it "returns false if user doesn't have an admin role" do
-        user.supplier = build :supplier
-        expect(user.market_maker?).to eq false
-      end
+    it "returns true if user has an admin role" do
+      user.spree_roles << admin_role
+      expect(user.market_maker?).to eq true
     end
 
-    context "when user is not a supplier" do
-      it "returns true if user has admin role" do
-        user.spree_roles << admin_role
-
-        expect(user.market_maker?).to eq true
-      end
-
-      it "returns false if user doesn't have an admin role" do
-        expect(user.market_maker?).to eq false
-      end
+    it "returns false if user doesn't have an admin role" do
+      expect(user.market_maker?).to eq false
     end
   end
 

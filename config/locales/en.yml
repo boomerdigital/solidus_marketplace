@@ -92,6 +92,7 @@ en:
         subject: 'Thank you for signing up.  Please verify your information.'
         thank_you_again: "Thank you again for your business, <b>%{name}</b>"
         thank_you_for_signing_up: Thank you for signing up to be a drop ship supplier.
+    supplier_placeholder: Add a Supplier
     supplier_registration:
       already_signed_up: "You've already signed up to become a supplier."
       create:

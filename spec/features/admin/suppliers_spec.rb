@@ -8,7 +8,7 @@ feature 'Admin - Suppliers', js: true do
     @supplier = create :supplier
   end
 
-  context 'as an Admin' do
+  context 'as an MarketMaker (aka admin)' do
 
     before do
       login_user create(:admin_user)
@@ -16,7 +16,7 @@ feature 'Admin - Suppliers', js: true do
       within '[data-hook=admin_tabs]' do
         click_link 'Suppliers'
       end
-      expect(page).to have_content('Listing Suppliers')
+      expect(page).to have_content('Suppliers')
     end
 
     xscenario 'should be able to create new supplier' do
@@ -32,7 +32,7 @@ feature 'Admin - Suppliers', js: true do
       fill_in 'supplier[address_attributes][address1]', with: '1 Test Drive'
       fill_in 'supplier[address_attributes][city]', with: 'Test City'
       fill_in 'supplier[address_attributes][zipcode]', with: '55555'
-      select2 'United States', from: 'Country'
+      select2 'United States of America', from: 'Country'
       select2 'Vermont', from: 'State'
       fill_in 'supplier[address_attributes][phone]', with: '555-555-5555'
       click_button 'Create'
@@ -71,20 +71,24 @@ feature 'Admin - Suppliers', js: true do
 
   context 'as a Supplier' do
     before do
-      @user = create(:supplier_user)
+      @user = create(:supplier_admin)
       login_user @user
       visit spree.edit_admin_supplier_path(@user.supplier)
     end
 
     scenario 'should only see tabs they have access to' do
       within '[data-hook=admin_tabs]' do
-        expect(page).to_not have_link('Overview')
         expect(page).to have_link('Products')
+        expect(page).to have_link('Stock')
+        expect(page).to have_link('Stock Locations')
+        expect(page).to have_link('Profile')
+        expect(page).to have_link('Orders')
+
+        expect(page).to_not have_link('Overview')
         expect(page).to_not have_link('Reports')
         expect(page).to_not have_link('Configuration')
         expect(page).to_not have_link('Promotions')
         expect(page).to_not have_link('Suppliers')
-        expect(page).to have_link('Shipments')
       end
     end
 

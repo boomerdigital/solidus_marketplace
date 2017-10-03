@@ -38,7 +38,7 @@ module Spree
 
         let(:packer) { build(:stock_packer) }
 
-        subject { DropShip.new(packer) }
+        subject { DropShip.new(packer.stock_location) }
 
         it 'splits packages for drop ship' do
           package = Package.new(packer.stock_location)

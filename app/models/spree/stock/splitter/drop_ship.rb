@@ -8,11 +8,10 @@ module Spree
           split_packages = []
           packages.each do |package|
             # Package fulfilled items together.
-            fulfilled = package.contents.select { |content| 
+            fulfilled = package.contents.select { |content|
               begin
-              content.variant.suppliers.count == 0 
+              content.variant.suppliers.count == 0
               rescue => e
-                binding.pry
               end
             }
             split_packages << build_package(fulfilled)
@@ -24,7 +23,7 @@ module Spree
               # Select suppliers ordering ascending according to cost.
               suppliers = variant.supplier_variants.order("spree_supplier_variants.cost ASC").map(&:supplier)
               # Select first supplier that has stock location with avialable stock item.
-              available_supplier = suppliers.detect do |supplier| 
+              available_supplier = suppliers.detect do |supplier|
                 supplier.stock_locations_with_available_stock_items(variant).any?
               end
               # Select the first available stock location with in the available_supplier stock locations.
@@ -38,7 +37,6 @@ module Spree
             end
           end
           rescue => e
-            binding.pry
           end
           return_next split_packages
         end

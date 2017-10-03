@@ -11,6 +11,11 @@ Spree::StockLocation.class_eval do
     end
   end
 
+  def unpropagate_variant(variant)
+    stock_items = self.stock_items.where(variant: variant)
+    stock_items.map(&:destroy)
+  end
+
   def available?(variant)
     stock_item(variant).try(:available?)
   end
