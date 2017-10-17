@@ -48,10 +48,18 @@ Sample Data
 If you'd like to generate sample data, use the included rake tasks:
 
 ```shell
+rake db:seed                         # Loads seed data into the store
 rake spree_sample:load               # Loads sample data into the store
 rake spree_sample:suppliers          # Create sample suppliers and randomly link to products
 rake spree_sample:drop_ship_orders   # Create sample drop ship orders
 ```
+
+This will include a new role (supplier_admin) and 2 new users in addition to the default 'admin@example.com' user provided by solidus.
+
+Those users have the following email/password/roles
+
+* marketmaker@example.com / test123 / admin
+* supplier_admin@example.com / test123 / supplier_admin
 
 Demo
 ----
