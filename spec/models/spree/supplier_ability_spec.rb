@@ -173,7 +173,7 @@ describe Spree::SupplierAbility do
     context 'requested by suppliers user' do
       let(:resource) { user.supplier }
       it_should_behave_like 'admin granted'
-      it_should_behave_like 'update only'
+      it_should_behave_like 'read and update access granted'
     end
   end
 

@@ -20,7 +20,9 @@ module Spree
 
         # cannot :read, Spree::StockLocation
         # can [:read, :manage], Spree::StockLocation, supplier_id: user.supplier_id
-        can [:admin, :update],          Spree::Supplier, id: user.supplier_id
+        can [:admin, :manage], Spree::Supplier, id: user.supplier_id
+        cannot [:create], Spree::Supplier
+        can [:admin, :manage], Spree::User, supplier_id: user.supplier_id
         can [:admin, :read],            Spree::Order,    stock_location: { supplier_id: user.supplier_id }
       end
 

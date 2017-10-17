@@ -83,12 +83,12 @@ feature 'Admin - Suppliers', js: true do
         expect(page).to have_link('Stock Locations')
         expect(page).to have_link('Profile')
         expect(page).to have_link('Orders')
+        expect(page).to have_link('Suppliers')
 
         expect(page).to_not have_link('Overview')
         expect(page).to_not have_link('Reports')
         expect(page).to_not have_link('Configuration')
         expect(page).to_not have_link('Promotions')
-        expect(page).to_not have_link('Suppliers')
       end
     end
 
