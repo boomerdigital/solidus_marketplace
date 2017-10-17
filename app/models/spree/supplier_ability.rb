@@ -13,9 +13,8 @@ module Spree
 
         #FIXME: come back to these when we work on shipping-related issues
         # can [:admin, :manage, :read, :ready, :ship], Spree::Shipment, order: { state: 'complete' }, stock_location: { supplier_id: user.supplier_id }
-        # can [:admin, :create, :update], :stock_items
         can [:admin, :manage, :create], Spree::StockItem,     stock_location_id: user.supplier.stock_locations.pluck(:id)
-        can [:admin, :manage, :create], Spree::StockLocation, supplier_id: user.supplier_id
+        can [:admin, :index, :show, :new, :edit, :create, :update], Spree::StockLocation, supplier_id: user.supplier_id
         can [:admin, :manage, :create], Spree::StockMovement, stock_item: { stock_location_id: user.supplier.stock_locations.pluck(:id) }
 
         # cannot :read, Spree::StockLocation
