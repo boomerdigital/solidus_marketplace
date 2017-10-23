@@ -32,6 +32,11 @@ Now run the generator:
 
     rails g solidus_marketplace:install
 
+(Optional) Run the generator for solidus_gateway to enable the use of Stripe or other payment providers
+included with that extension:
+
+    rails g solidus_gateway:install
+
 Then migrate your database if you did not run during installation generator:
 
     bundle exec rake db:migrate

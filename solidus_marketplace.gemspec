@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'solidus_api'
   s.add_dependency 'solidus_backend'
   s.add_dependency 'solidus_core'
+  s.add_dependency 'solidus_gateway'
 
   s.add_development_dependency 'capybara',           '~> 2.2'
   s.add_development_dependency 'coffee-rails'
