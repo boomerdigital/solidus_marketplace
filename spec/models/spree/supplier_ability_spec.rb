@@ -29,9 +29,11 @@ describe Spree::SupplierAbility do
 
     before(:each) do
       resource.add_supplier!(user.supplier)
+      resource.reload
     end
 
     it_should_behave_like 'index allowed'
+    it_should_behave_like 'read and update access granted'
     it_should_behave_like 'admin granted'
 
     context 'requested by another suppliers user' do
