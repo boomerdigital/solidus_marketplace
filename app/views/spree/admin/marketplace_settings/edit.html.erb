@@ -1,8 +1,8 @@
 <% content_for :page_title do %>
-    <%= Spree.t("drop_ship_settings") %>
+    <%= Spree.t("marketplace_settings") %>
 <% end %>
 
-<%= form_tag(spree.admin_drop_ship_settings_path, :method => :put) do %>
+<%= form_tag(spree.admin_marketplace_settings_path, :method => :put) do %>
     <fieldset class="general no-border-top">
       <% %w( default_commission_flat_rate default_commission_percentage automatically_deliver_orders_to_supplier send_supplier_email).each do |key|
         type = SolidusMarketplace::Config.preference_type(key) %>
@@ -15,7 +15,7 @@
       <div class="form-buttons" data-hook="buttons">
         <%= button Spree.t(:update), 'update' %>
         <span class="or"><%= Spree.t(:or) %></span>
-        <%= button_link_to Spree.t(:cancel), spree.edit_admin_drop_ship_settings_url, :icon => 'cancel' %>
+        <%= button_link_to Spree.t(:cancel), spree.edit_admin_marketplace_settings_url, :icon => 'cancel' %>
       </div>
     </fieldset>
 <% end %>

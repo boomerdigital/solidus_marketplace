@@ -1,8 +1,5 @@
 module Spree
-  class DropShipConfiguration < Preferences::Configuration
-
-    # Automatically deliver drop ship orders by default.
-    preference :automatically_deliver_orders_to_supplier, :boolean, default: true
+  class MarketplaceConfiguration < Preferences::Configuration
 
     # Default flat rate to charge suppliers per order for commission.
     preference :default_commission_flat_rate, :float, default: 0.0

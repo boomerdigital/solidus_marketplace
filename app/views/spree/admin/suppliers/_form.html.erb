@@ -21,6 +21,12 @@
       <%# email validation %>
       <%= error_message_on :user, :email %>
     <% end %>
+    <%= form.field_container :paypal_email, class: ['form-group'] do %>
+      <%= form.label :paypal_email, Spree::Supplier.human_attribute_name(:paypal_email) %>:<br />
+      <%= form.email_field :paypal_email, :class => 'form-control' %>
+      <%# email validation %>
+      <%= error_message_on :user, :paypal_email %>
+    <% end %>
     <%= form.field_container :url, class: ['form-group'] do %>
       <%= form.label :url, Spree::Supplier.human_attribute_name(:url) %>:<br />
       <%= form.text_field :url, :class => 'form-control' %>

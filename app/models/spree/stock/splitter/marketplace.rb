@@ -1,7 +1,7 @@
 module Spree
   module Stock
     module Splitter
-      class DropShip < Spree::Stock::Splitter::Base
+      class Marketplace < Spree::Stock::Splitter::Base
 
         def split(packages)
           begin
@@ -15,9 +15,9 @@ module Spree
               end
             }
             split_packages << build_package(fulfilled)
-            # Determine which supplier to package drop shipped items.
-            drop_ship = package.contents.select { |content| content.variant.suppliers.count > 0 }
-            drop_ship.each do |content|
+            # Determine which supplier to package shipped items.
+            supplier_contents = package.contents.select { |content| content.variant.suppliers.count > 0 }
+            supplier_contents.each do |content|
               # Select the related variant
               variant = content.variant
               # Select suppliers ordering ascending according to cost.

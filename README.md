@@ -56,7 +56,7 @@ If you'd like to generate sample data, use the included rake tasks:
 rake db:seed                         # Loads seed data into the store
 rake spree_sample:load               # Loads sample data into the store
 rake spree_sample:suppliers          # Create sample suppliers and randomly link to products
-rake spree_sample:drop_ship_orders   # Create sample drop ship orders
+rake spree_sample:marketplace_orders # Create sample marketplace orders
 ```
 
 This will include a new role (supplier_admin) and 2 new users in addition to the default 'admin@example.com' user provided by solidus.
@@ -77,7 +77,7 @@ cd solidus_marketplace
 bundle install
 bundle exec rake test_app
 cd spec/dummy
-rake db:migrate db:seed spree_sample:load spree_sample:suppliers spree_sample:drop_ship_orders
+rake db:migrate db:seed spree_sample:load spree_sample:suppliers spree_sample:marketplace_orders
 rails s
 ```
 

@@ -1,6 +1,6 @@
 namespace :spree_sample do
-  desc "Create sample drop ship orders"
-  task :drop_ship_orders => :environment do
+  desc "Create sample marketplace orders"
+  task :marketplace_orders => :environment do
     if Spree::Order.count == 0
       puts "Please run `rake spree_sample:load` first to create products and orders"
       exit
@@ -21,7 +21,7 @@ namespace :spree_sample do
     end
     puts
 
-    puts "Creating drop ship orders for existing orders"
+    puts "Creating marketplace orders for existing orders"
     Spree::Order.all.each do |order|
       print "*" if order.finalize!
     end

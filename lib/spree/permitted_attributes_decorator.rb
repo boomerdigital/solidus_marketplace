@@ -10,7 +10,8 @@ Spree::PermittedAttributes.class_eval do
     :deleted_at,
     :tax_id,
     :token,
-    :slug
+    :slug,
+    :paypal_email
   ]
 
   mattr_reader(:supplier_attributes)

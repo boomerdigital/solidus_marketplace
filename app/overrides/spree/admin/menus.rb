@@ -11,5 +11,5 @@ Deface::Override.new(
   name: "marketplace_admin_configurations_menu",
   insert_bottom: "[data-hook='admin_configurations_sidebar_menu']",
   disabled: false,
-  partial: "spree/admin/shared/drop_ship_settings"
+  partial: "spree/admin/shared/marketplace_settings"
 )

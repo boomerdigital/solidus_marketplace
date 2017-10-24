@@ -25,18 +25,19 @@ en:
         suppliers: Suppliers
         shipments: Shipments
         profile: Profile
-      drop_ship_settings:
+        earnings: Earnings
+      marketplace_settings:
         update:
-          success: Drop ship settings successfully updated.
+          success: Marketplace settings successfully updated.
       orders:
         edit:
-          approve_drop_ship_orders: Approve Drop Ship Orders
-          resend_drop_ship_orders: Resend Drop Ship Orders
-          drop_ship_order_approval_confirmation: This will send an email notification to each supplier. Continue?
+          approve_marketplace_orders: Approve Marketplace Orders
+          resend_marketplace_orders: Resend Marketplace Orders
+          marketplace_order_approval_confirmation: This will send an email notification to each supplier. Continue?
         show:
-          approve_drop_ship_orders: Approve Drop Ship Orders
-          resend_drop_ship_orders: Resend Drop Ship Orders
-          drop_ship_order_approval_confirmation: This will send an email notification to each supplier. Continue?
+          approve_marketplace_orders: Approve Marketplace Orders
+          resend_marketplace_orders: Resend Marketplace Orders
+          marketplace_order_approval_confirmation: This will send an email notification to each supplier. Continue?
     back_to_orders_list: Back To Orders List
     back_to_suppliers: Back To Suppliers
     business: Business
@@ -45,18 +46,20 @@ en:
     confirm_order: Confirm Order
     contact_address: Contact Address
     automatically_deliver_orders_to_supplier: Automatically Deliver Orders To Supplier
-    send_supplier_email: Send Supplier Email
+    send_supplier_email: Send Welcome Email to New Suppliers
     default_commission_percentage: Default Commission Percentage
     default_commission_flat_rate: Default Commission Flat Rate
     drop_ship: Drop Ship
-    drop_ship_order_mailer:
+    earnings: Earnings
+    earnings_description: Earnings for Suppliers over the specified time period
+    marketplace_order_mailer:
       supplier_order:
         hello: "Hello %{name},"
-        subject: "%{name} Drop Shipment #%{number}"
+        subject: "%{name} Marketplace Order #%{number}"
         thank_you_again: "Thank you again for your business, <b>%{name}</b>"
-    drop_ship_order_number: "Drop Ship Order #%{number}"
-    drop_ship_orders: Drop Ship Orders
-    drop_ship_settings: Drop Ship Settings
+    marketplace_order_number: "Marketplace Order #%{number}"
+    marketplace_orders: Marketplace Orders
+    marketplace_settings: Marketplace Settings
     editing_supplier: Editing Supplier
     individual: Individual
     manage: Manage
@@ -82,6 +85,7 @@ en:
     signup_to_become_a_supplier: 'Sign Up To Become A Supplier'
     supplier: Supplier
     supplier_details: Supplier Details
+    supplier_earnings: Supplier Earnings
     supplier_info: Supplier Info
     supplier_information: Supplier Information
     supplier_mailer:
@@ -91,7 +95,8 @@ en:
         manage_your_account: You may now manage your profile and inventory by
         subject: 'Thank you for signing up.  Please verify your information.'
         thank_you_again: "Thank you again for your business, <b>%{name}</b>"
-        thank_you_for_signing_up: Thank you for signing up to be a drop ship supplier.
+        thank_you_for_signing_up: Thank you for signing up to be a supplier.
+    supplier_paypal_email: PayPal Email
     supplier_placeholder: Add a Supplier
     supplier_registration:
       already_signed_up: "You've already signed up to become a supplier."

@@ -36,28 +36,28 @@ es:
             url:
               invalid: es inválido. Por favor asegúrece que 'http://' esté incluido
               not_responding: 'es inválido, no responde o ha redireccionado a otra url'
-  drop_ship_order_number: "Drop Ship Orden #%{number}"
-  drop_ship_orders: Drop Ship Ordenes
-  drop_ship_settings: Drop Ship Configuración
+  marketplace_order_number: "Mercado Orden #%{number}"
+  marketplace_orders: Mercado Ordenes
+  marketplace_settings: Mercado Configuración
   must_be_logged_in: 'Debe Estar Autenticado'
   signup: Registro
   signup_to_become_a_supplier: 'Autentíquese para ser un Proveedor'
   spree:
     admin:
-      drop_ship_settings:
+      marketplace_settings:
         update:
-          success: Configuración Drop ship actualizada correctamente
+          success: Configuración mercado actualizada correctamente
       orders:
-        drop_ship_order_order_header:
-          drop_ship_order_ids: DSO IDs
+        marketplace_order_order_header:
+          marketplace_order_ids: DSO IDs
         edit:
-          approve_drop_ship_orders: Ordenes aprobadas por el proveedor
-          resend_drop_ship_orders: Reenviar ordenes al proveedor
-          drop_ship_order_approval_confirmation: Se le enviará una notificación por correo electrónico a cada proveedor. ¿Desea continuar?
+          approve_marketplace_orders: Ordenes aprobadas por el proveedor
+          resend_marketplace_orders: Reenviar ordenes al proveedor
+          marketplace_order_approval_confirmation: Se le enviará una notificación por correo electrónico a cada proveedor. ¿Desea continuar?
         show:
-          approve_drop_ship_orders: Ordene aprobadas por el proveedor
-          resend_drop_ship_orders: Reenviar ordenes al proveedor
-          drop_ship_order_approval_confirmation: Se le enviará una notificación por correo electrónico a cada proveedor. ¿Desea continuar?
+          approve_marketplace_orders: Ordene aprobadas por el proveedor
+          resend_marketplace_orders: Reenviar ordenes al proveedor
+          marketplace_order_approval_confirmation: Se le enviará una notificación por correo electrónico a cada proveedor. ¿Desea continuar?
       suppliers:
         edit:
           back_to_suppliers: Regresar a los proveedores 
@@ -66,7 +66,7 @@ es:
         form:
           supplier_details: Detalles del Proveedor
           supplier_address: Dirección del Proveedor
-      drop_ship_orders:
+      marketplace_orders:
         deliver:
           error: "La orden %{number} no pudo ser enviada al proveedor."
           success: "La orden %{number} fue enviada al proveedor."
@@ -104,7 +104,7 @@ es:
     show_only_incomplete_orders: Solo mostrar ordenes incompletas
     supplier: Proveedor
     supplier_information: Información del proveedor
-    drop_ship_order_mailer:
+    marketplace_order_mailer:
       supplier_order:
         hello: "Hola %{name},"
         subject: "%{name} Orden al proveedor #%{number}"

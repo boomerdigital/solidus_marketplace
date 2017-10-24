@@ -61,7 +61,7 @@ describe Spree::Supplier do
       @mail_message = double('Mail::Message')
     end
 
-    context 'with Spree::DropShipConfig[:send_supplier_email] == false' do
+    context 'with SolidusMarketplace::Config[:send_supplier_email] == false' do
 
       it 'should not send' do
         SolidusMarketplace::Config[:send_supplier_email] = false
@@ -73,7 +73,7 @@ describe Spree::Supplier do
 
     end
 
-    context 'with Spree::DropShipConfig[:send_supplier_email] == true' do
+    context 'with SolidusMarketplace::Config[:send_supplier_email] == true' do
 
       it 'should send welcome email' do
         expect {
@@ -94,7 +94,7 @@ describe Spree::Supplier do
     SolidusMarketplace::Config.set default_commission_percentage: 0
     # Default configuration is 0.0 for each.
     expect(supplier.commission_flat_rate.to_f).to eql(1.0)
-    expect(supplier.commission_percentage.to_f).to eql(1.0)
+    expect(supplier.commission_percentage.to_f).to eql(10.0)
     # With custom commission applied.
     supplier = create :supplier, commission_flat_rate: 123, commission_percentage: 25
     expect(supplier.commission_flat_rate).to eql(123.0)

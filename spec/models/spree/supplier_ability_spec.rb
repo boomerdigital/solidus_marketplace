@@ -70,7 +70,7 @@ describe Spree::SupplierAbility do
     context 'requested by suppliers user' do
       context 'when order is complete' do
         let(:resource) {
-          order = create(:completed_order_for_drop_ship_with_totals)
+          order = create(:completed_order_from_supplier_with_totals)
           order.stock_locations.first.update_attribute :supplier, user.supplier
           Spree::Shipment.new({order: order, stock_location: order.stock_locations.first })
         }

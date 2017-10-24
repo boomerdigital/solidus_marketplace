@@ -12,11 +12,11 @@ module SolidusMarketplace
     end
 
     initializer 'solidus_marketplace.custom_splitters', after: 'spree.register.stock_splitters' do |app|
-      app.config.spree.stock_splitters << Spree::Stock::Splitter::DropShip
+      app.config.spree.stock_splitters << Spree::Stock::Splitter::Marketplace
     end
 
     initializer "solidus_marketplace.preferences", before: :load_config_initializers  do |app|
-      SolidusMarketplace::Config = Spree::DropShipConfiguration.new
+      SolidusMarketplace::Config = Spree::MarketplaceConfiguration.new
     end
 
     initializer "solidus_marketplace.menu", before: :load_config_initializers  do |app|

@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :order_for_drop_ship, parent: :order do
+  factory :order_from_supplier, parent: :order do
     bill_address
     ship_address
 
@@ -29,7 +29,7 @@ FactoryGirl.define do
       order.recalculate
     end
 
-    factory :completed_order_for_drop_ship_with_totals do
+    factory :completed_order_from_supplier_with_totals do
       state 'complete'
 
       after(:create) do |order|
@@ -37,7 +37,7 @@ FactoryGirl.define do
         order.update_column(:completed_at, Time.now)
       end
 
-      factory :order_ready_for_drop_ship do
+      factory :order_from_supplier_ready_to_ship do
         payment_state 'paid'
         shipment_state 'ready'
 
@@ -50,7 +50,7 @@ FactoryGirl.define do
           order.reload
         end
 
-        factory :shipped_order_for_drop_ship do
+        factory :shipped_order_from_supplier do
           after(:create) do |order|
             order.shipments.each do |shipment|
               shipment.inventory_units.each { |u| u.update_column('state', 'shipped') }
@@ -68,6 +68,8 @@ FactoryGirl.define do
     email { FFaker::Internet.email }
     url "http://example.com"
     address
+    commission_flat_rate 0.0
+    commission_percentage 10.0
     # Creating a stock location with a factory instead of letting the model handle it
     # so that we can run tests with backorderable defaulting to true.
     before :create do |supplier|

@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_marketplace'
   s.version     = '0.0.1'
-  s.summary     = 'Spree Drop Shipping Extension'
+  s.summary     = 'Solidus Marketplace Extension'
   s.description = 'Adds marketplace functionality to Solidus stores.'
   s.required_ruby_version = '>= 2.0.0'
 

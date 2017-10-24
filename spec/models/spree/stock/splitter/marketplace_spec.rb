@@ -3,7 +3,7 @@ require 'spec_helper'
 module Spree
   module Stock
     module Splitter
-      describe DropShip do
+      describe Marketplace do
 
         let(:supplier_1) { create(:supplier) }
         let(:supplier_2) { create(:supplier) }
@@ -38,9 +38,9 @@ module Spree
 
         let(:packer) { build(:stock_packer) }
 
-        subject { DropShip.new(packer.stock_location) }
+        subject { Marketplace.new(packer.stock_location) }
 
-        it 'splits packages for drop ship' do
+        it 'splits packages for suppliers to ship' do
           package = Package.new(packer.stock_location)
           package = Package.new(packer.stock_location)
           4.times { |i| package.add build(:inventory_unit, variant: variants[i]) }

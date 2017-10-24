@@ -4,7 +4,7 @@ describe 'Admin - Shipments', js: true do
 
   context 'as Supplier' do
 
-    let!(:order) { build(:order_ready_for_drop_ship, state: 'complete', completed_at: "2011-02-01 12:36:15", number: "R100") }
+    let!(:order) { build(:order_from_supplier_ready_to_ship, state: 'complete', completed_at: "2011-02-01 12:36:15", number: "R100") }
     let!(:supplier) { create(:supplier) }
 
     let!(:product) {
