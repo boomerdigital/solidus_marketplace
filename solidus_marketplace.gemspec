@@ -1,8 +1,13 @@
  # encoding: UTF-8
+
+lib = File.expand_path('../lib/', __FILE__)
+$:.unshift lib unless $:.include?(lib)
+require 'solidus_marketplace/version'
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_marketplace'
-  s.version     = '0.0.1'
+  s.version     = SolidusMarketplace::VERSION
   s.summary     = 'Solidus Marketplace Extension'
   s.description = 'Adds marketplace functionality to Solidus stores.'
   s.required_ruby_version = '>= 2.0.0'

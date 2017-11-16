@@ -22,7 +22,7 @@ Here's how to install solidus_marketplace into your existing spree site AFTER yo
 
 Add the following to your Gemfile:
 
-    gem 'solidus_marketplace', github: 'boomerdigital/solidus_marketplace'
+    gem 'solidus_marketplace'
 
 Make your bundle happy:
 
