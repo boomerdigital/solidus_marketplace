@@ -90,6 +90,7 @@ class Spree::Supplier < Spree::Base
           active: true,
           country_id: self.address.try(:country_id),
           name: self.name,
+          propagate_all_variants: false,
           state_id: self.address.try(:state_id)
         )
         # It's important location is always created.  Some apps add validations that shouldn't break this.
