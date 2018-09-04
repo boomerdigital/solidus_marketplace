@@ -7,7 +7,7 @@ class Spree::Supplier < Spree::Base
 
   #==========================================
   # Associations
-
+  belongs_to :user, :class_name => Spree.user_class.to_s
   belongs_to :address, class_name: 'Spree::Address'
   accepts_nested_attributes_for :address
 

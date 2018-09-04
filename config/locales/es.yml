@@ -44,6 +44,8 @@ es:
   signup_to_become_a_supplier: 'Autentíquese para ser un Proveedor'
   spree:
     admin:
+      user:
+        wallets: Métodos de Pago
       marketplace_settings:
         update:
           success: Configuración mercado actualizada correctamente
@@ -91,6 +93,9 @@ es:
     name: Nombre
     or: ó
     suppliers: Proveedores
+    user_admin: Usuario Administrador
+    remove_payment_method: Eliminar tarjeta
+    add_payment_method: Añadir tarjeta de pago
     listing_shipments: 'Lista de envíos'
     order_state:
       active: Activo

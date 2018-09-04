@@ -19,6 +19,14 @@ Spree::Admin::UsersController.class_eval do
     end
   end
 
+  def wallet
+    @payment_method = Spree::PaymentMethod.find_by(type: 'Spree::Gateway::StripeGateway', deleted_at: nil)
+  end
+
+  def removewallet
+    @payment_method = Spree::PaymentMethod.find_by(type: 'Spree::Gateway::StripeGateway', deleted_at: nil)
+  end
+
   private
 
   def build_resource
