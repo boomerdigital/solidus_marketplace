@@ -15,12 +15,12 @@
       <%= form.label :name, Spree::Supplier.human_attribute_name(:name) %>:<br />
       <%= form.text_field :name, :class => 'form-control' %>
     <% end %>
-    <%= form.field_container :email, class: ['form-group'] do %>
-      <%= form.label :email, Spree::Supplier.human_attribute_name(:email) %>:<br />
-      <%= form.email_field :email, :class => 'form-control' %>
-      <%# email validation %>
-      <%= error_message_on :user, :email %>
+
+    <%= form.field_container :user_admin, class: ['form-group'] do %>
+      <%= form.label :user_admin %><br/>
+      <%= hidden_field_tag 'supplier[user_admin_string]', form.object.user_id, class: 'user_picker fullwidth' %>
     <% end %>
+
     <%= form.field_container :paypal_email, class: ['form-group'] do %>
       <%= form.label :paypal_email, Spree::Supplier.human_attribute_name(:paypal_email) %>:<br />
       <%= form.email_field :paypal_email, :class => 'form-control' %>

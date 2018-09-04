@@ -43,7 +43,7 @@
         <tr <%= "style='color: red;'" if supplier.deleted? %> id="<%= spree_dom_id supplier %>" data-hook="admin_suppliers_index_rows" class="<%= cycle('odd', 'even') %>">
           <!--todo: Fix this link!-->
           <td><%= link_to supplier.name, edit_object_url(supplier) %></td>
-          <td><%= mail_to supplier.email %></td>
+          <td><%= mail_to supplier.user.email %></td>
           <td><%= supplier.users.pluck(:email).join(', ') %></td>
           <td><%= supplier.active %></td>
           <td class='actions actions-3' data-hook='admin_suppliers_index_row_actions'>
