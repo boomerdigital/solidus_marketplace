@@ -70,7 +70,7 @@ class Spree::Supplier < Spree::Base
 
     def assign_user
       if self.users.empty?
-        if user = Spree.user_class.find_by_email(self.email)
+        if user = self.user
           self.users << user
           self.save
         end
