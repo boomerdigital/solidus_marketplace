@@ -22,6 +22,7 @@ Spree::Core::Engine.routes.prepend do
       end
     end
 
+
     resources :users do
       member do
         get :wallets

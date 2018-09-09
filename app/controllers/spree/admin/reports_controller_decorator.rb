@@ -2,7 +2,7 @@ require 'csv'
 
 Spree::Admin::ReportsController.class_eval do
   before_action :add_marketplace_reports, only: [:index]
-  
+
   def earnings
     @supplier_earnings = get_supplier_earnings
     respond_to do |format|
@@ -10,6 +10,8 @@ Spree::Admin::ReportsController.class_eval do
       format.csv { send_data earnings_csv }
     end
   end
+
+
 
   def earnings_csv
     header1 = ["Supplier Earnings"]
