@@ -70,10 +70,8 @@ class Spree::Supplier < Spree::Base
 
     def assign_user
       if self.users.empty?
-        if user = self.user
-          self.users << user
+          self.users << self.user
           self.save
-        end
       end
     end
 
