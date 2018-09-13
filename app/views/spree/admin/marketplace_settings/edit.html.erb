@@ -7,9 +7,12 @@
       <% %w( default_commission_flat_rate default_commission_percentage automatically_deliver_orders_to_supplier send_supplier_email).each do |key|
         type = SolidusMarketplace::Config.preference_type(key) %>
           <div class="field col-md-6">
-            <%= label_tag(key, Spree.t(key) + ': ') + tag(:br) if type != :boolean %>
-            <%= preference_field_tag(key, SolidusMarketplace::Config[key], :type => type ,:class => 'form-control')%>
-            <%= label_tag(key, Spree.t(key)) + tag(:br) if type == :boolean %>
+
+            <%= label_tag key do %>
+              <%= preference_field_tag(key, SolidusMarketplace::Config[key], :type => type ,:class => 'form-control')%>
+              <%= label_tag(key, Spree.t(key)) + tag(:br) if type == :boolean %>
+            <% end %>
+            
           </div>
       <% end %>
       <div class="form-buttons" data-hook="buttons">
