@@ -1,0 +1,51 @@
+<div class="row">
+
+  <div data-hook="bill_address_wrapper" class="col-12 js-addresses-form">
+    <fieldset class="no-border-bottom">
+        <legend align="center"><%= t('spree.payment_methods') %></legend>
+
+        <% wallet_payment_sources = @user.wallet.wallet_payment_sources %>
+
+        <% if wallet_payment_sources.present? %>
+        <% default_wallet_payment_source = wallet_payment_sources.detect(&:default) ||
+        wallet_payment_sources.first %>
+
+          <table  class="table table-striped">
+            <tbody>
+            <% wallet_payment_sources.each do |wallet_payment_source| %>
+
+              <%=
+                render(
+                    partial: "spree/checkout/existing_payment/#{wallet_payment_source.payment_source.payment_method.partial_name}",
+                    locals: {
+                        wallet_payment_source: wallet_payment_source,
+                        default: wallet_payment_source == default_wallet_payment_source,
+                    }
+                )
+              %>
+
+
+
+            <% end %>
+
+            </tbody>
+          </table>
+        <% else %>
+          <div id='users-wallet-list-empty'>
+            <%= Spree.t(:no_payment_methods) %>
+          </div>
+        <% end %>
+        <% if can?(:update, @user) %>
+            <div class="text-align-center">
+              <div id='new_wallet_link'>
+                <%= link_to Spree.t(:add_new_payment_method), spree.addwallet_admin_user_path(@user), class: :button %>
+                <%= link_to Spree.t(:remove_payment_method), {controller: :users, action: :removewallet}, "data-confirm": Spree.t(:are_you_sure), class: :button %>
+              </div>
+            </div>
+        <% end %>
+
+    </fieldset>
+  </div>
+
+
+</div>

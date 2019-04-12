@@ -7,7 +7,7 @@ class Spree::Supplier < Spree::Base
 
   #==========================================
   # Associations
-
+  belongs_to :user, :class_name => Spree.user_class.to_s
   belongs_to :address, class_name: 'Spree::Address'
   accepts_nested_attributes_for :address
 
@@ -29,7 +29,6 @@ class Spree::Supplier < Spree::Base
 
   validates :commission_flat_rate,   presence: true
   validates :commission_percentage,  presence: true
-  validates :email,                  presence: true, email: true, uniqueness: true
   validates :name,                   presence: true, uniqueness: true
   validates :url,                    format: { with: URI::regexp(%w(http https)), allow_blank: true }
 
@@ -71,10 +70,8 @@ class Spree::Supplier < Spree::Base
 
     def assign_user
       if self.users.empty?
-        if user = Spree.user_class.find_by_email(self.email)
-          self.users << user
+          self.users << self.user
           self.save
-        end
       end
     end
 
@@ -98,14 +95,7 @@ class Spree::Supplier < Spree::Base
     end
 
     def send_welcome
-      begin
-        Spree::SupplierMailer.welcome(self.id).deliver_later!
-        # Specs raise error for not being able to set default_url_options[:host]
-      rescue => ex #Errno::ECONNREFUSED => ex
-        Rails.logger.error ex.message
-        Rails.logger.error ex.backtrace.join("\n")
-        return true # always return true so that failed email doesn't crash app.
-      end
+
     end
 
     def set_commission

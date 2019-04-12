@@ -1,0 +1,5 @@
+<% if can?(:wallets, @user) %>
+  <li<%== ' class="active"' if current == :wallet %>>
+    <%= link_to t("spree.admin.user.wallets"), spree.wallets_admin_user_path(@user) %>
+  </li>
+<% end %>

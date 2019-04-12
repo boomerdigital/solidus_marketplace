@@ -65,7 +65,7 @@ FactoryGirl.define do
 
   factory :supplier, :class => Spree::Supplier do
     sequence(:name) { |i| "Big Store #{i}" }
-    email { FFaker::Internet.email }
+    user_id
     url "http://example.com"
     address
     commission_flat_rate 0.0

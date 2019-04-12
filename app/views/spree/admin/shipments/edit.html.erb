@@ -8,7 +8,7 @@
       <legend align="center"><%= Spree.t(:supplier_information) %></legend>
       <div>
         <b><%= Spree::Supplier.human_attribute_name(:name) %>:</b> <%= @shipment.supplier.name %><br/>
-        <b><%= Spree::Supplier.human_attribute_name(:email) %>:</b> <%= @shipment.supplier.email %><br/>
+        <b><%= Spree::Supplier.human_attribute_name(:email) %>:</b> <%= @shipment.supplier.user.email %><br/>
         <b><%= Spree::Supplier.human_attribute_name(:url) %>:</b> <%= link_to @shipment.supplier.url, @shipment.supplier.url if @shipment.supplier.url.present? %><br/>
       </div>
       <div>

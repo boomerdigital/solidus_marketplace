@@ -4,7 +4,7 @@ Spree::PermittedAttributes.class_eval do
     :address_id,
     :commission_flat_rate,
     :commission_percentage,
-    :email,
+    :user_id,
     :name,
     :url,
     :deleted_at,

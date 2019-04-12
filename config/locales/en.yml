@@ -20,6 +20,8 @@ en:
               not_responding: 'is invalid, not responding or redirecting to another location'
   spree:
     admin:
+      user:
+        wallets: Payment Methods
       tab:
         stock_locations: Stock Locations
         suppliers: Suppliers
@@ -105,3 +107,6 @@ en:
         success: Thank you for signing up!
     supplier_signup: Supplier Sign Up
     suppliers: Suppliers
+    user_admin: Admin User
+    remove_payment_method: Remove payment method
+    add_payment_method: Add payment method

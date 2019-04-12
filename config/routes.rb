@@ -14,11 +14,23 @@ end
 
 Spree::Core::Engine.routes.prepend do
   namespace :admin do
-    resources :reports do
+
+    resources :reports, only: [:index] do
       collection do
         get   :earnings
         post  :earnings
       end
     end
+
+
+    resources :users do
+      member do
+        get :wallets
+        put :wallets
+      end
+
+    end
+
+
   end
 end
