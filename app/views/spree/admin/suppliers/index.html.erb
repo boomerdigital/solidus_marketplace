@@ -1,55 +1,65 @@
-<%# Updated icon %>
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t('new_supplier'), new_object_url, icon: 'add', class: 'btn-success' %>
+  <li id='new_supplier'>
+    <%= link_to t('spree.new_supplier'), new_object_url, class: 'btn btn-primary' %>
+  </li>
 <% end %>
 
 <% admin_breadcrumb(plural_resource_name(Spree::Supplier)) %>
 
 <% content_for :table_filter_title do %>
-  <%= Spree.t(:search) %>
+  <%= t('spree.search') %>
 <% end %>
 
 <% content_for :table_filter do %>
   <div data-hook='admin_suppliers_filter'>
     <%= search_form_for [:admin, @search] do |f| %>
-        <div class="form-group">
-          <%= f.label :name_cont, Spree.t(:name) %>
-          <%= f.text_field :name_cont, :size => 15, class: "form-control" %>
+      <div class='row' data-hook='admin_suppliers_index_search' >
+        <div class='col-6'>
+          <div class='field'>
+            <%= f.label :name_cont, Spree::Product.human_attribute_name(:name) %>
+            <%= f.text_field :name_cont, size: 15 %>
+          </div>
         </div>
-      <div class="clear"></div>
-      <div class="form-actions" data-hook="admin_suppliers_index_search_buttons">
-        <%= button Spree.t(:search), 'search' %>
+      </div>
+
+      <div class='actions filter-actions' data-hook='admin_products_index_search_buttons'>
+        <%= button_tag t('spree.search'), class: 'btn btn-primary' %>
       </div>
     <% end %>
   </div>
 <% end %>
 
-<%= paginate @collection, theme: "solidus_admin" %>
+<div id='new_supplier_wrapper' data-hook></div>
+
+<%= paginate @collection, theme: 'solidus_admin' %>
 
 <% if @collection.any? %>
-  <table class="table" id="listing_suppliers">
+  <table class='table' id='listing_suppliers'>
     <thead>
       <tr data-hook='admin_suppliers_index_headers'>
-        <th><%= sort_link @search, :name,  Spree::Supplier.human_attribute_name(:name) %></th>
-        <th><%= sort_link @search, :email, Spree::Supplier.human_attribute_name(:email) %></th>
-        <th><%= Spree.t(:users) %></th>
-        <th><%= sort_link @search, :active, Spree::Supplier.human_attribute_name(:active) %></th>
-        <th data-hook="admin_suppliers_index_header_actions" class="actions"></th>
+        <th><%= sort_link(@search, :name, Spree::Supplier.human_attribute_name(:name)) %></th>
+        <th><%= t('spree.admins') %></th>
+        <th><%= t('spree.users') %></th>
+        <th><%= sort_link(@search, :active, t('spree.status')) %></th>
+        <th data-hook='admin_suppliers_index_header_actions' class='actions'></th>
       </tr>
     </thead>
+
     <tbody>
-    <%# Updated classes! %>
-      <%- @collection.each do |supplier| %>
+      <% @collection.each do |supplier| %>
         <tr <%= "style='color: red;'" if supplier.deleted? %> id="<%= spree_dom_id supplier %>" data-hook="admin_suppliers_index_rows" class="<%= cycle('odd', 'even') %>">
-          <!--todo: Fix this link!-->
           <td><%= link_to supplier.name, edit_object_url(supplier) %></td>
-          <td><%= mail_to supplier.user.email %></td>
+          <td><%= supplier.admins.pluck(:email).join(', ') %></td>
           <td><%= supplier.users.pluck(:email).join(', ') %></td>
-          <td><%= supplier.active %></td>
-          <td class='actions actions-3' data-hook='admin_suppliers_index_row_actions'>
+          <td>
+            <span class="pill pill-<%= supplier.active? ? 'active' : 'inactive' %>">
+              <%= t("spree.#{supplier.active? ? 'active' : 'inactive'}") %>
+            </span>
+          </td>
+          <td class='actions' data-hook='admin_suppliers_index_row_actions'>
             <% unless supplier.deleted? %>
-              <%= link_to_edit supplier, :no_text => true, :class => 'edit' %>
-              <%= link_to_delete supplier, :no_text => true %>
+              <%= link_to_edit supplier, no_text: true, class: 'edit' if can?(:edit, supplier) && !supplier.deleted? %>
+              <%= link_to_delete supplier, no_text: true if can?(:delete, supplier) && !supplier.deleted? %>
             <% end %>
           </td>
         </tr>
@@ -57,12 +67,11 @@
     </tbody>
   </table>
 <% else %>
-  <%# New alert with link to add new supplier %>
-  <div class="alert alert-info no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: Spree::Supplier.model_name.human(count: :many)) %>,
-    <%= link_to Spree.t(:add_one), spree.new_admin_supplier_path %>!
+  <div class='no-objects-found'>
+    <%= render 'spree/admin/shared/no_objects_found',
+                  resource: Spree::Supplier,
+                  new_resource_url: new_object_url %>
   </div>
 <% end %>
 
-<%# This is a new paginate! %>
-<%= paginate @collection, theme: "solidus_admin" %>
+<%= paginate @collection, theme: 'solidus_admin' %>

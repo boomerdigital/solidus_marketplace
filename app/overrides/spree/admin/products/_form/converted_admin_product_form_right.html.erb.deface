@@ -1,5 +1,0 @@
-<!-- insert_bottom "[data-hook='admin_product_form_right'], #admin_product_form_right[data-hook]" -->
-
-<% if can? :manage, Spree::Supplier %>
-  <!-- TODO allow assignment to variants -->
-<% end %>

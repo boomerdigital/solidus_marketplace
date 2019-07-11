@@ -1,7 +1,6 @@
 module Spree
   module Admin
     class ShipmentsController < Spree::Admin::ResourceController
-
       def index
         params[:q] ||= {}
         # params[:q][:completed_at_null] ||= '1'
@@ -41,7 +40,6 @@ module Spree
           model_class.find_by!(number: params[:id])
         end
       end
-
     end
   end
 end

@@ -1,0 +1,14 @@
+<% if try_spree_current_user.has_admin_role? %>
+  <div class="col-md-6">
+    <fieldset class="no-border-bottom">
+      <legend>Supplier</legend>
+
+      <div class="field" id="stock_location_supplier_field">
+        <%= f.field_container :supplier do %>
+          <%= f.label :supplier_id %>
+          <%= f.collection_select(:supplier_id, Spree::Supplier.all, :id, :name, { include_blank: 'None' }, { class: 'select2 fullwidth' }) %>
+        <% end %>
+      </div>
+    </fieldset>
+  </div>
+<% end %>

@@ -1,38 +1,33 @@
 <div class="row">
-
   <div data-hook="bill_address_wrapper" class="col-12 js-addresses-form">
     <fieldset class="no-border-bottom">
-        <legend align="center"><%= t('spree.payment_methods') %></legend>
+      <legend align="center"><%= t('spree.payment_methods') %></legend>
+      <% wallet_payment_sources = @user.wallet.wallet_payment_sources %>
 
-        <% wallet_payment_sources = @user.wallet.wallet_payment_sources %>
+      <% if wallet_payment_sources.present? %>
+        <% default_wallet_payment_source = wallet_payment_sources.detect(&:default) || wallet_payment_sources.first %>
 
-        <% if wallet_payment_sources.present? %>
-        <% default_wallet_payment_source = wallet_payment_sources.detect(&:default) ||
-        wallet_payment_sources.first %>
+        <table  class="table table-striped">
+          <tbody>
+          <% wallet_payment_sources.each do |wallet_payment_source| %>
+            <%=
+              render(
+                  partial: "spree/checkout/existing_payment/#{wallet_payment_source.payment_source.payment_method.partial_name}",
+                  locals: {
+                      wallet_payment_source: wallet_payment_source,
+                      default: wallet_payment_source == default_wallet_payment_source,
+                  }
+              )
+            %>
+          <% end %>
 
-          <table  class="table table-striped">
-            <tbody>
-            <% wallet_payment_sources.each do |wallet_payment_source| %>
-
-              <%=
-                render(
-                    partial: "spree/checkout/existing_payment/#{wallet_payment_source.payment_source.payment_method.partial_name}",
-                    locals: {
-                        wallet_payment_source: wallet_payment_source,
-                        default: wallet_payment_source == default_wallet_payment_source,
-                    }
-                )
-              %>
-            <% end %>
-
-            </tbody>
-          </table>
-        <% else %>
-          <div id='users-wallet-list-empty'>
-            <%= Spree.t(:no_payment_methods) %>
-          </div>
-        <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div id='users-wallet-list-empty'>
+          <%= t('spree.no_payment_methods') %>
+        </div>
+      <% end %>
     </fieldset>
   </div>
-
 </div>

@@ -1,7 +1,5 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe Spree::Payment do
-
-  it { should belong_to(:payable) }
-
+RSpec.describe Spree::Payment do
+  it { is_expected.to respond_to(:payable) }
 end

@@ -1,24 +1,17 @@
-<% if can? :index, Spree::Supplier %>
-  <% content_for :page_actions do %>
-    <%= button_link_to Spree.t('back_to_suppliers'), spree.admin_suppliers_path, icon: 'arrow-left' %>
-  <% end %>
+<% admin_breadcrumb(link_to(plural_resource_name(Spree::Supplier), admin_suppliers_path)) %>
+<% admin_breadcrumb(@object.name) %>
+
+<% content_for :page_actions do %>
+  <li id="back_supplier_link">
+    <%= link_to t('spree.back_to_suppliers'), spree.admin_suppliers_path, class: 'btn btn-primary' %>
+  </li>
 <% end %>
 
-<% content_for :page_title do %>
-  <%== Spree.t(:editing_supplier) + " &ldquo;#{@object.name}&rdquo;".html_safe %>
-<% end %>
-
-<%= render 'spree/shared/error_messages', target: @object %>
-
-<%= link_to Spree.t(:user), edit_admin_user_path(@object.user) , class:"button primary"%>
+<%= render partial: 'spree/shared/error_messages', locals: { target: @object } %>
 
 <%= form_for [:admin, @object] do |f| %>
-  <%= render "form", form: f %>
-  <div data-hook="supplier_right_column_wrapper" class="col-md-4"></div>
-  <%# render 'update' and 'cancel'  buttons %>
-  <div class="col-md-8">
-  <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
-  </div>
+  <fieldset class="no-border-top">
+    <%= render 'form', f: f %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
 <% end %>
-
-

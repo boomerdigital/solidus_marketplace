@@ -1,4 +1,6 @@
-class AddSupplierIdToCkeditorAssets < ActiveRecord::Migration[4.2]
+# frozen_string_literal: true
+
+class AddSupplierIdToCkeditorAssets < SolidusSupport::Migration[4.2]
   if table_exists?(:ckeditor_assets)
     def change
       add_column :ckeditor_assets, :supplier_id, :integer

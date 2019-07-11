@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module SolidusMarketplace
   class Engine < Rails::Engine
-    require 'spree/core'
     isolate_namespace Spree
     engine_name 'solidus_marketplace'
 
@@ -15,11 +16,12 @@ module SolidusMarketplace
       app.config.spree.stock_splitters << Spree::Stock::Splitter::Marketplace
     end
 
-    initializer "solidus_marketplace.preferences", before: :load_config_initializers  do |app|
-      SolidusMarketplace::Config = Spree::MarketplaceConfiguration.new
+    initializer 'solidus_marketplace.preferences', before: :load_config_initializers  do |app|
+      SolidusMarketplace::Config = SolidusMarketplace::Configuration.new
+      Spree::PermittedAttributes.singleton_class.prepend(SolidusMarketplace::PermittedAttributes)
     end
 
-    initializer "solidus_marketplace.menu", before: :load_config_initializers  do |app|
+    initializer 'solidus_marketplace.menu', before: :load_config_initializers  do |app|
       Spree::Backend::Config.configure do |config|
         config.menu_items << Spree::BackendConfiguration::MenuItem.new(
           [:stock_locations],
@@ -45,9 +47,10 @@ module SolidusMarketplace
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+
       Spree::Ability.register_ability(Spree::SupplierAbility)
     end
 
-    config.to_prepare &method(:activate).to_proc
+    config.to_prepare(&method(:activate).to_proc)
   end
 end

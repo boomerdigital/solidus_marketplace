@@ -1,17 +1,18 @@
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t('back_to_suppliers'), spree.admin_suppliers_path, icon: 'arrow-left' %>
+  <li id="back_supplier_link">
+    <%= link_to t('spree.back_to_suppliers'), spree.admin_suppliers_path, class: 'btn btn-primary' %>
+  </li>
 <% end %>
 
 <% content_for :page_title do %>
-   <%= Spree.t('new_supplier') %>
+   <%= t('spree.new_supplier') %>
 <% end %>
 
-<%= render 'spree/shared/error_messages', target: @object%>
+<%= render partial: 'spree/shared/error_messages', locals: { target: @object } %>
 
 <%= form_for [:admin, @object] do |f| %>
-  <%= render "form", form: f %>
-  <%# render 'create' and 'cancel'  buttons %>
-  <div class="col-md-8">
-      <%= render :partial => 'spree/admin/shared/new_resource_links' %>
-  </div>
+  <fieldset class='no-border-top'>
+    <%= render 'form', f: f %>
+    <%= render partial: 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
 <% end %>

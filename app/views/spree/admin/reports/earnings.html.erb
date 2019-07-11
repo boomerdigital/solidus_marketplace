@@ -2,6 +2,9 @@
 <% admin_breadcrumb(t('spree.earnings')) %>
 
 <% content_for :page_actions do %>
+  <li id='export_supplier_csv'>
+    <%= link_to t('spree.export_supplier_csv'), spree.earnings_admin_reports_url(format: 'csv'), class: 'btn btn-primary' %>
+  </li>
 <% end %>
 
 <% content_for :table_filter_title do %>
@@ -30,5 +33,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to "Export Earnings CSV", earnings_admin_reports_url(format: "csv") %>

@@ -1,4 +1,6 @@
-class AddBalancedTokenToSuppliers < ActiveRecord::Migration[4.2]
+# frozen_string_literal: true
+
+class AddBalancedTokenToSuppliers < SolidusSupport::Migration[4.2]
   def change
     add_column :spree_suppliers, :tax_id, :string
     add_column :spree_suppliers, :token, :string

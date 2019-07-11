@@ -2,52 +2,52 @@ $.fn.supplierAutocomplete = function () {
   'use strict';
 
   this.select2({
-      placeholder: Spree.translations.supplier_placeholder,
-      multiple: true,
-      initSelection: function (element, callback) {
-        var ids = element.val(),
-            count = ids.split(",").length;
+    placeholder: Spree.translations.supplier_placeholder,
+    multiple: true,
+    initSelection: function (element, callback) {
+      var ids = element.val(),
+          count = ids.split(",").length;
 
-        Spree.ajax({
-          type: "GET",
-          url: Spree.routes.suppliers_search,
-          data: {
-            ids: ids,
-            per_page: count
-          },
-          success: function (data) {
-            callback(data['suppliers']);
-          }
-        });
-      },
-      ajax: {
+      Spree.ajax({
+        type: "GET",
         url: Spree.routes.suppliers_search,
-        datatype: 'json',
-        data: function (term, page) {
-          return {
-            per_page: 50,
-            page: page,
-            q: {
-              name_cont: term
-            },
-            token: Spree.api_key
-          };
+        data: {
+          ids: ids,
+          per_page: count
         },
-        results: function (data, page) {
-          var more = page < data.pages;
-          return {
-            results: data['suppliers'],
-            more: more
-          };
+        success: function (data) {
+          callback(data['suppliers']);
         }
+      });
+    },
+    ajax: {
+      url: Spree.routes.suppliers_search,
+      datatype: 'json',
+      data: function (term, page) {
+        return {
+          per_page: 50,
+          page: page,
+          q: {
+            name_cont: term
+          },
+          token: Spree.api_key
+        };
       },
-      formatResult: function (supplier, container, query, escapeMarkup) {
-        return escapeMarkup(supplier.name);
-      },
-      formatSelection: function (supplier, container, escapeMarkup) {
-        return escapeMarkup(supplier.name);
+      results: function (data, page) {
+        var more = page < data.pages;
+        return {
+          results: data['suppliers'],
+          more: more
+        };
       }
-    });
+    },
+    formatResult: function (supplier, container, query, escapeMarkup) {
+      return escapeMarkup(supplier.name);
+    },
+    formatSelection: function (supplier, container, escapeMarkup) {
+      return escapeMarkup(supplier.name);
+    }
+  });
 };
 
 $(document).ready(function () {

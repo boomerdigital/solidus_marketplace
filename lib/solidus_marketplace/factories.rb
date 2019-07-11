@@ -1,19 +1,18 @@
-FactoryGirl.define do
+# frozen_string_literal: true
 
+FactoryBot.define do
   factory :order_from_supplier, parent: :order do
     bill_address
     ship_address
 
     transient do
-      line_items_count 5
+      line_items_count { 5 }
     end
 
     after(:create) do |order, evaluator|
       supplier = create(:supplier)
       product = create(:product)
       product.add_supplier! supplier
-      # product.stock_items.where(variant_id: product.master.id).first.adjust_count_on_hand(10)
-
       product_2 = create(:product)
       product_2.add_supplier! create(:supplier)
 
@@ -21,16 +20,15 @@ FactoryGirl.define do
         order: order,
         variant: product_2.master
       )
-      order.line_items.reload
 
+      order.line_items.reload
       create(:shipment, order: order, stock_location: supplier.stock_locations.first)
       order.shipments.reload
-
       order.recalculate
     end
 
     factory :completed_order_from_supplier_with_totals do
-      state 'complete'
+      state { 'complete' }
 
       after(:create) do |order|
         order.refresh_shipment_rates
@@ -38,8 +36,8 @@ FactoryGirl.define do
       end
 
       factory :order_from_supplier_ready_to_ship do
-        payment_state 'paid'
-        shipment_state 'ready'
+        payment_state { 'paid' }
+        shipment_state { 'ready' }
 
         after(:create) do |order|
           create(:payment, amount: order.total, order: order, state: 'completed')
@@ -63,22 +61,24 @@ FactoryGirl.define do
     end
   end
 
-  factory :supplier, :class => Spree::Supplier do
+  factory :supplier, class: Spree::Supplier do
     sequence(:name) { |i| "Big Store #{i}" }
-    user_id
-    url "http://example.com"
+    user
+    url { 'http://example.com' }
     address
-    commission_flat_rate 0.0
-    commission_percentage 10.0
+    commission_flat_rate { 0.0 }
+    commission_percentage { 10.0 }
     # Creating a stock location with a factory instead of letting the model handle it
     # so that we can run tests with backorderable defaulting to true.
     before :create do |supplier|
-      supplier.stock_locations << build(:stock_location, name: supplier.name, supplier: supplier)
+      supplier.stock_locations << build(:stock_location,
+                                        name: supplier.name,
+                                        supplier: supplier)
     end
 
     factory :supplier_with_commission do
-      commission_flat_rate 0.5
-      commission_percentage 10
+      commission_flat_rate { 0.5 }
+      commission_percentage { 10 }
     end
   end
 
@@ -87,7 +87,7 @@ FactoryGirl.define do
   end
 
   factory :supplier_admin_role, parent: :role do
-    name "supplier_admin"
+    name { 'supplier_admin' }
   end
 
   factory :supplier_admin, parent: :user do
@@ -103,5 +103,4 @@ FactoryGirl.define do
       variant.product.add_supplier! create(:supplier)
     end
   end
-
 end

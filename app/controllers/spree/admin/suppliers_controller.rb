@@ -1,54 +1,36 @@
-class Spree::Admin::SuppliersController < Spree::Admin::ResourceController
+module Spree
+  module Admin
+    class SuppliersController < Spree::Admin::ResourceController
+      before_action :set_address, only: [:update]
+      before_action :build_address, only: [:edit, :new]
 
-  def update
-    @object.address = Spree::Address.immutable_merge(@object.address, permitted_resource_params[:address_attributes])
+      private
 
-    if @object.update_attributes(permitted_resource_params.except(:address_attributes))
-      respond_with(@object) do |format|
-        format.html do
-          flash[:success] = flash_message_for(@object, :successfully_updated)
-          redirect_to location_after_save
-        end
-        format.js { render layout: false }
+      def set_address
+        address_attributes = permitted_resource_params.delete(:address_attributes)
+        @object.address = Spree::Address.immutable_merge(@object.address,
+                                                         permitted_resource_params.delete(:address_attributes))
       end
-    else
-      respond_with(@object) do |format|
-        format.html do
-          flash.now[:error] = @object.errors.full_messages.join(", ")
-          render_after_update_error
-        end
-        format.js { render layout: false }
+
+      def build_address
+        @object.address = Spree::Address.build_default unless @object.address.present?
+      end
+
+      def collection
+        params[:q] ||= {}
+        params[:q][:meta_sort] ||= 'name.asc'
+        @search = Spree::Supplier.search(params[:q])
+        @collection = @search.result.page(params[:page]).
+          per(Spree::Config[:orders_per_page])
+      end
+
+      def find_resource
+        Spree::Supplier.friendly.find(params[:id])
+      end
+
+      def location_after_save
+        spree.edit_admin_supplier_path(@object)
       end
     end
   end
-
-  def edit
-    @object.address = Spree::Address.build_default unless @object.address.present?
-    respond_with(@object) do |format|
-      format.html { render :layout => !request.xhr? }
-      format.js   { render :layout => false }
-    end
-  end
-
-  def new
-    @object.address = Spree::Address.build_default
-  end
-
-  private
-
-    def collection
-      params[:q] ||= {}
-      params[:q][:meta_sort] ||= "name.asc"
-      @search = Spree::Supplier.search(params[:q])
-      @collection = @search.result.page(params[:page]).per(Spree::Config[:orders_per_page])
-    end
-
-    def find_resource
-      Spree::Supplier.friendly.find(params[:id])
-    end
-
-    def location_after_save
-      spree.edit_admin_supplier_path(@object)
-    end
-
 end

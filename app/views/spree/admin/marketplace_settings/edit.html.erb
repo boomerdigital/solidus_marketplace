@@ -1,26 +1,24 @@
-<%= render 'spree/admin/shared/configuration_menu' %>
+<%= render 'spree/admin/shared/general_tabs' %>
 
-<% content_for :page_title do %>
-    <%= Spree.t("marketplace_settings") %>
+<% admin_breadcrumb(link_to(plural_resource_name(Spree::Store), admin_stores_path)) %>
+<% admin_breadcrumb(t('spree.marketplace_settings')) %>
+
+<% content_for :page_actions do %>
 <% end %>
 
-<%= form_tag(spree.admin_marketplace_settings_path, :method => :put) do %>
-    <fieldset class="general no-border-top">
-      <% %w( default_commission_flat_rate default_commission_percentage automatically_deliver_orders_to_supplier send_supplier_email).each do |key|
-        type = SolidusMarketplace::Config.preference_type(key) %>
+<%= form_tag(spree.admin_marketplace_settings_path, method: :put) do %>
+  <fieldset class='no-border-top'>
+    <% SolidusMarketplace::Config.preferences.keys.each do |key|
+      type = SolidusMarketplace::Config.preference_type(key) %>
 
-        <div class="field col-md-6">
-          <%= render "spree/admin/shared/preference_fields/#{type}",
-                     label: Spree.t(key) , name: key, value: SolidusMarketplace::Config[key] %>
-
-        </div>
-
-
-      <% end %>
-      <div class="form-buttons" data-hook="buttons">
-        <%= button Spree.t(:update), 'update' %>
-        <span class="or"><%= Spree.t(:or) %></span>
-        <%= button_link_to Spree.t(:cancel), spree.edit_admin_marketplace_settings_url, :icon => 'cancel' %>
-      </div>
-    </fieldset>
+      <%= render "spree/admin/shared/preference_fields/#{type}",
+                 label: t("spree.#{key}") ,
+                 name: key,
+                 value: SolidusMarketplace::Config[key] %>
+    <% end %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links',
+               locals: { collection_url: spree.admin_stores_path } %>
+  </fieldset>
 <% end %>
+
+

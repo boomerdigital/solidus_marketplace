@@ -2,13 +2,11 @@
 <% admin_breadcrumb(link_to @user.email, edit_admin_user_url(@user)) %>
 <% admin_breadcrumb(plural_resource_name(Spree::Address)) %>
 
-
 <%= render 'spree/admin/users/sidebar' %>
 <%= render 'spree/admin/users/tabs', current: :wallet %>
 <%= render partial: 'spree/admin/users/user_page_actions' %>
 
 <fieldset data-hook="admin_user_wallets" id="admin_user_edit_wallet">
-
   <div data-hook="admin_user_edit_form_header">
     <%= render partial: 'spree/shared/error_messages', locals: { target: @user } %>
   </div>

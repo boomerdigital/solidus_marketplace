@@ -53,6 +53,9 @@ en:
           approve_marketplace_orders: Approve Marketplace Orders
           resend_marketplace_orders: Resend Marketplace Orders
           marketplace_order_approval_confirmation: This will send an email notification to each supplier. Continue?
+    active: Active
+    address: Address
+    admins: Admins
     back_to_orders_list: Back To Orders List
     back_to_suppliers: Back To Suppliers
     business: Business
@@ -67,6 +70,7 @@ en:
     drop_ship: Drop Ship
     earnings: Earnings
     earnings_description: Earnings for Suppliers over the specified time period
+    export_supplier_csv: Export Earnings CSV
     marketplace_order_mailer:
       supplier_order:
         hello: "Hello %{name},"
@@ -76,6 +80,7 @@ en:
     marketplace_orders: Marketplace Orders
     marketplace_settings: Marketplace Settings
     editing_supplier: Editing Supplier
+    inactive: Inactive
     individual: Individual
     manage: Manage
     must_be_logged_in: 'Must Be Logged In'

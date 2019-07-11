@@ -1,62 +1,26 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-module Spree
-  module Stock
-    module Splitter
-      describe Marketplace do
+RSpec.describe Spree::Stock::Splitter::Marketplace do
+  let(:stock_location) { create(:stock_location) }
+  let(:supplier1) { create(:supplier, stock_locations: [stock_location]) }
+  let(:supplier2) { create(:supplier, stock_locations: [stock_location]) }
+  let(:variant) do
+    variant = create(:variant)
+    variant.product.add_supplier!(supplier1)
+    variant.reload.supplier_variants.find_by_supplier_id(supplier1.id).
+      update_column(:cost, 5)
+    variant.product.add_supplier!(supplier2)
+    variant.reload.supplier_variants.find_by_supplier_id(supplier2.id).
+      update_column(:cost, 6)
+    variant
+  end
 
-        let(:supplier_1) { create(:supplier) }
-        let(:supplier_2) { create(:supplier) }
+  subject { described_class.new(stock_location) }
 
-        let(:variant_1) {
-          v = create(:variant)
-          v.product.add_supplier! supplier_1
-          v.reload.supplier_variants.find_by_supplier_id(supplier_1.id).update_column(:cost, 5)
-          v.product.add_supplier! supplier_2
-          v.reload.supplier_variants.find_by_supplier_id(supplier_2.id).update_column(:cost, 6)
-          v
-        }
-        let(:variant_2) {
-          v = create(:variant)
-          v.product.add_supplier! supplier_1
-          v.reload.supplier_variants.find_by_supplier_id(supplier_1.id).update_column(:cost, 5)
-          v.product.add_supplier! supplier_2
-          v.reload.supplier_variants.find_by_supplier_id(supplier_2.id).update_column(:cost, 4)
-          v
-        }
-        let(:variant_3) {
-          v = create(:variant)
-          v.product.add_supplier! supplier_1
-          v.product.add_supplier! supplier_2
-          v.reload
-        }
-        let(:variant_4) { create(:variant) }
-
-        let(:variants){
-          [variant_1, variant_2, variant_3, variant_4]
-        }
-
-        let(:packer) { build(:stock_packer) }
-
-        subject { Marketplace.new(packer.stock_location) }
-
-        it 'splits packages for suppliers to ship' do
-          package = Package.new(packer.stock_location)
-          package = Package.new(packer.stock_location)
-          4.times { |i| package.add build(:inventory_unit, variant: variants[i]) }
-
-          packages = subject.split([package])
-          expect(packages.count).to eq 3
-
-          expect(packages[0].stock_location).to eq(packer.stock_location)
-          expect(packages[0].contents.count).to eq(1)
-          expect(packages[1].stock_location).to eq(supplier_1.stock_locations.first)
-          expect(packages[1].contents.count).to eq(2)
-          expect(packages[2].stock_location).to eq(supplier_2.stock_locations.first)
-          expect(packages[2].contents.count).to eq(1)
-        end
-
-      end
-    end
+  it 'splits packages for suppliers to ship' do
+    package = Spree::Stock::Package.new(stock_location)
+    2.times { package.add build(:inventory_unit, variant: variant) }
+    packages = subject.split([package])
+    expect(packages.count).to eq(2)
   end
 end

@@ -1,4 +1,6 @@
-class CreateSpreeSupplierVariants < ActiveRecord::Migration[4.2]
+# frozen_string_literal: true
+
+class CreateSpreeSupplierVariants < SolidusSupport::Migration[4.2]
   def change
     create_table :spree_supplier_variants do |t|
       t.belongs_to :supplier, index: true
@@ -7,9 +9,11 @@ class CreateSpreeSupplierVariants < ActiveRecord::Migration[4.2]
 
       t.timestamps
     end
+
     Spree::Product.where.not(supplier_id: nil).each do |product|
       product.add_supplier! product.supplier_id
     end
+
     remove_column :spree_products, :supplier_id
   end
 end
