@@ -11,14 +11,3 @@ Spree::Core::Engine.routes.draw do
   end
 
 end
-
-Spree::Core::Engine.routes.prepend do
-  namespace :admin do
-    resources :reports do
-      collection do
-        get   :earnings
-        post  :earnings
-      end
-    end
-  end
-end

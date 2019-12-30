@@ -86,7 +86,6 @@ feature 'Admin - Suppliers', js: true do
         expect(page).to have_link('Suppliers')
 
         expect(page).to_not have_link('Overview')
-        expect(page).to_not have_link('Reports')
         expect(page).to_not have_link('Configuration')
         expect(page).to_not have_link('Promotions')
       end
