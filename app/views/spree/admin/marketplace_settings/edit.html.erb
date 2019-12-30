@@ -13,9 +13,9 @@
           </div>
       <% end %>
       <div class="form-buttons" data-hook="buttons">
-        <%= button Spree.t(:update), 'update' %>
-        <span class="or"><%= Spree.t(:or) %></span>
-        <%= button_link_to Spree.t(:cancel), spree.edit_admin_marketplace_settings_url, :icon => 'cancel' %>
+        <%= button I18n.t('spree.update'), 'update' %>
+        <span class="or"><%= I18n.t('spree.or') %></span>
+        <%= button_link_to I18n.t('spree.cancel'), spree.edit_admin_marketplace_settings_url, :icon => 'cancel' %>
       </div>
     </fieldset>
 <% end %>

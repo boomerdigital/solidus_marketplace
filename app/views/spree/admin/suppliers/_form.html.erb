@@ -1,8 +1,8 @@
 <div data-hook="supplier_address_wrapper" class="col-md-6">
   <fieldset class="no-border-bottom">
-    <legend align="center"><%= Spree.t('contact_address') %></legend>
+    <legend align="center"><%=I18n.t('spree.contact_address') %></legend>
     <%= form.fields_for :address do |contact_form| %>
-      <%= render :partial => 'spree/admin/shared/address_form', :locals => { :f => contact_form, :name => Spree.t(:contact_address), :type => "shipping" } %>
+      <%= render :partial => 'spree/admin/shared/address_form', :locals => { :f => contact_form, :name => I18n.t('spree.contact_address'), :type => "shipping" } %>
     <% end %>
   </fieldset>
 </div>
@@ -10,7 +10,7 @@
 <%# added bootstrap classes for 'field_container' and '' %>
 <div data-hook="supplier_details_wrapper" class="col-md-6">
   <fieldset class="no-border-bottom">
-    <legend align="center" ><%= Spree.t('supplier_details') %></legend>
+    <legend align="center" ><%=I18n.t('spree.supplier_details') %></legend>
     <%= form.field_container :name, class: ['form-group'] do %>
       <%= form.label :name, Spree::Supplier.human_attribute_name(:name) %>:<br />
       <%= form.text_field :name, :class => 'form-control' %>
@@ -57,19 +57,5 @@
         </div>
       <% end %>
     <% end %>
-    <%# This moved to _edit(new)_resource_links.html.erb %>
-    <!--<div class='center'>-->
-      <%# if form.object.new_record? %>
-        <%#= button Spree.t('create') %>
-      <%# else %>
-        <%#= button Spree.t('update') %>
-      <%# end %>
-      <%#= Spree.t('or') %>
-      <%# if can? :index, Spree::Supplier %>
-        <%#= link_to Spree.t('cancel'), collection_url %>
-      <%# else %>
-        <%#= link_to Spree.t('cancel'), spree.account_path %>
-      <%# end %>
-    <!--</div>-->
   </fieldset>
 </div>

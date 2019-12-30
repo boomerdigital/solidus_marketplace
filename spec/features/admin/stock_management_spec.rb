@@ -148,7 +148,7 @@ describe "Stock Management", js: true do
       end
 
       xit "redirects to stock locations page" do
-        expect(page).to have_content(Spree.t(:stock_management_requires_a_stock_location))
+        expect(page).to have_content(I18n.t('spree.stock_management_requires_a_stock_location'))
         expect(page.current_url).to include("admin/stock_locations")
       end
     end

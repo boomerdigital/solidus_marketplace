@@ -1,11 +1,11 @@
 <% if can? :index, Spree::Supplier %>
   <% content_for :page_actions do %>
-    <%= button_link_to Spree.t('back_to_suppliers'), spree.admin_suppliers_path, icon: 'arrow-left' %>
+    <%= button_link_to I18n.t('spree.back_to_suppliers'), spree.admin_suppliers_path, icon: 'arrow-left' %>
   <% end %>
 <% end %>
 
 <% content_for :page_title do %>
-  <%== Spree.t(:editing_supplier) + " &ldquo;#{@object.name}&rdquo;".html_safe %>
+  <%== I18n.t('spree.editing_supplier') + " &ldquo;#{@object.name}&rdquo;".html_safe %>
 <% end %>
 
 <%= render 'spree/shared/error_messages', target: @object %>

@@ -12,7 +12,7 @@ class Spree::Admin::MarketplaceSettingsController < Spree::Admin::BaseController
       config[name] = value
     end
 
-    flash[:success] = Spree.t('admin.marketplace_settings.update.success')
+    flash[:success] = I18n.t('spree.admin.marketplace_settings.update.success')
     redirect_to spree.edit_admin_marketplace_settings_path
   end
 

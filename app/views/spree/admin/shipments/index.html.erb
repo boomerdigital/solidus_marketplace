@@ -1,7 +1,7 @@
 <% admin_breadcrumb(plural_resource_name(Spree::Shipment)) %>
 
 <% content_for :table_filter_title do %>
-  <%= Spree.t(:search) %>
+  <%= I18n.t('spree.search') %>
 <% end %>
 
 <%# Update search form with new markup %>
@@ -11,13 +11,13 @@
     <div class="row">
       <div class="date-range-filter col-md-6">
         <div class="form-group">
-          <%= label_tag :q_created_at_gt, Spree.t(:date_range) %>
+          <%= label_tag :q_created_at_gt, I18n.t('spree.date_range') %>
           <div class="row">
             <div class="col-md-6">
-              <%= f.text_field :created_at_gt, :class => 'datepicker datepicker-from form-control', :value => params[:q][:created_at_gt], :placeholder => Spree.t(:start) %>
+              <%= f.text_field :created_at_gt, :class => 'datepicker datepicker-from form-control', :value => params[:q][:created_at_gt], :placeholder => I18n.t('spree.start') %>
             </div>
             <div class="col-md-6">
-              <%= f.text_field :created_at_lt, :class => 'datepicker datepicker-to form-control', :value => params[:q][:created_at_lt], :placeholder => Spree.t(:stop) %>
+              <%= f.text_field :created_at_lt, :class => 'datepicker datepicker-to form-control', :value => params[:q][:created_at_lt], :placeholder => I18n.t('spree.stop') %>
             </div>
           </div>
         </div>
@@ -26,21 +26,21 @@
       <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <%= label_tag nil, Spree.t(:shipment_number) %>
+          <%= label_tag nil, I18n.t('spree.shipment_number') %>
           <%= f.text_field :number_cont , class: 'form-control js-quick-search-target'%>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
-          <%= label_tag nil, Spree.t(:status) %><br/>
+          <%= label_tag nil, I18n.t('spree.status') %><br/>
           <%= f.select :state_eq, Spree::Shipment.state_machines[:state].states.collect {|s| [Spree.t("shipment_state.#{s.name}"), s.value]}, {:include_blank => true}, :class => 'select2' %>
         </div>
       </div>
       </div>
 
         <div data-hook="admin_shipments_index_search_buttons" class="form-actions">
-          <%= button Spree.t(:filter_results), 'search' %>
+          <%= button I18n.t('spree.filter_results'), 'search' %>
         </div>
     <% end %>
   </div>
@@ -85,7 +85,7 @@
 <% else %>
     <%# New alert 'Not Found' with i18n %>
     <div class="alert alert-info no-objects-found">
-      <%= Spree.t(:no_resource_found, resource: Spree::Shipment.model_name.human(count: :many)) %>,
+      <%= I18n.t('spree.no_resource_found', resource: Spree::Shipment.model_name.human(count: :many)) %>,
     </div>
 <% end %>
 

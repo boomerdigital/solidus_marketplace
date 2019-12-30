@@ -8,7 +8,7 @@ Spree::Admin::UsersController.class_eval do
       set_roles
       set_stock_locations
 
-      flash[:success] = Spree.t(:created_successfully)
+      flash[:success] = I18n.t('spree.created_successfully')
       redirect_to edit_admin_user_url(@user)
     else
       load_roles
