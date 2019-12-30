@@ -1,6 +1,6 @@
 <%# Updated icon %>
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t('new_supplier'), new_object_url, icon: 'add', class: 'btn-success' %>
+  <%= link_to Spree.t('new_supplier'), new_object_url, class: 'btn btn-primary' %>
 <% end %>
 
 <% admin_breadcrumb(plural_resource_name(Spree::Supplier)) %>
@@ -18,7 +18,7 @@
         </div>
       <div class="clear"></div>
       <div class="form-actions" data-hook="admin_suppliers_index_search_buttons">
-        <%= button Spree.t(:search), 'search' %>
+        <%= button_tag Spree.t(:search), class: 'btn btn-primary'  %>
       </div>
     <% end %>
   </div>
