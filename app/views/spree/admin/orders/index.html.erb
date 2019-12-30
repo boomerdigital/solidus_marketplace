@@ -2,10 +2,9 @@
 
 <% admin_breadcrumb(plural_resource_name(Spree::Order)) %>
 
-
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to I18n.t('spree.new_order'), new_admin_order_url, id: 'admin_new_order' %>
+    <%= link_to I18n.t('spree.new_order'), new_admin_order_url, id: 'admin_new_order', class: 'btn btn-primary' %>
   </li>
 <% end if can? :create, Spree::Order %>
 
@@ -104,7 +103,7 @@
 
       <div class="actions filter-actions">
         <div data-hook="admin_orders_index_search_buttons">
-          <%= button I18n.t('spree.filter_results') %>
+          <%= button_tag I18n.t('spree.filter_results'), class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>
