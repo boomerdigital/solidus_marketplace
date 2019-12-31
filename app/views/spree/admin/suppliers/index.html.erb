@@ -13,8 +13,8 @@
   <div data-hook='admin_suppliers_filter'>
     <%= search_form_for [:admin, @search] do |f| %>
         <div class="form-group">
-          <%= f.label :name_cont, I18n.t('spree.name') %>
-          <%= f.text_field :name_cont, :size => 15, class: "form-control" %>
+          <%= f.label :name, I18n.t('spree.name') %>
+          <%= f.text_field :name, :size => 15, class: "form-control" %>
         </div>
       <div class="clear"></div>
       <div class="form-actions" data-hook="admin_suppliers_index_search_buttons">
