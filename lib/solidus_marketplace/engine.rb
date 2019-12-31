@@ -21,23 +21,11 @@ module SolidusMarketplace
 
     initializer "solidus_marketplace.menu", before: :load_config_initializers  do |app|
       Spree::Backend::Config.configure do |config|
-        # config.menu_items << Spree::BackendConfiguration::MenuItem.new(
-        #   [:stock_locations],
-        #   'globe',
-        #   condition: -> { can?(:index, Spree::StockLocation) },
-        # )
-
         config.menu_items << Spree::BackendConfiguration::MenuItem.new(
           [:suppliers],
           'home',
-          condition: -> { can?(:index, Spree::Supplier) },
+          condition: -> { can?(:index, Spree::Supplier) }
         )
-
-        # config.menu_items << Spree::BackendConfiguration::MenuItem.new(
-        #   [:shipments],
-        #   'plane',
-        #   condition: -> { can?(:index, Spree::Shipment) },
-        # )
       end
     end
 
