@@ -21,11 +21,11 @@ module SolidusMarketplace
 
     initializer "solidus_marketplace.menu", before: :load_config_initializers  do |app|
       Spree::Backend::Config.configure do |config|
-        config.menu_items << Spree::BackendConfiguration::MenuItem.new(
-          [:stock_locations],
-          'globe',
-          condition: -> { can?(:index, Spree::StockLocation) },
-        )
+        # config.menu_items << Spree::BackendConfiguration::MenuItem.new(
+        #   [:stock_locations],
+        #   'globe',
+        #   condition: -> { can?(:index, Spree::StockLocation) },
+        # )
 
         config.menu_items << Spree::BackendConfiguration::MenuItem.new(
           [:suppliers],
@@ -45,6 +45,7 @@ module SolidusMarketplace
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+
       Spree::Ability.register_ability(Spree::SupplierAbility)
     end
 
