@@ -34,7 +34,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= label_tag nil, I18n.t('spree.status') %><br/>
-          <%= f.select :state_eq, Spree::Shipment.state_machines[:state].states.collect {|s| [I18n.t(("spree.shipment_state.#{s.name}"), s.value]}, {:include_blank => true}, :class => 'select2' %>
+          <%= f.select :state_eq, Spree::Shipment.state_machines[:state].states.collect {|s| [I18n.t("spree.shipment_state.#{s.name}"), s.value]}, {:include_blank => true}, :class => 'select2' %>
         </div>
       </div>
       </div>
