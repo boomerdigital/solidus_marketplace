@@ -3,6 +3,8 @@ class Spree::Supplier < Spree::Base
   # include ActiveModel::ForbiddenAttributesProtection
   friendly_id :name, use: :slugged
 
+  self.whitelisted_ransackable_attributes = %w[name]
+
   attr_accessor :password, :password_confirmation
 
   #==========================================
