@@ -25,7 +25,8 @@ Spree::Core::Engine.routes.prepend do
     resources :users do
       member do
         get :wallets
-        put :wallets
+        put :wallets_actions
+        put :addcard
       end
 
     end

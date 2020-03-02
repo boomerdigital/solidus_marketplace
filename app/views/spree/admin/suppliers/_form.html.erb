@@ -16,9 +16,9 @@
       <%= form.text_field :name, :class => 'form-control' %>
     <% end %>
 
-    <%= form.field_container :user_admin, class: ['form-group'] do %>
+    <%= form.field_container :user, class: ['form-group'] do %>
       <%= form.label :user_admin %><br/>
-      <%= hidden_field_tag 'supplier[user_admin_string]', form.object.user_id, class: 'user_picker fullwidth' %>
+      <%= hidden_field_tag 'supplier[user_id]', form.object.user_ids.join(','), class: 'user_picker fullwidth' %>
     <% end %>
 
     <%= form.field_container :paypal_email, class: ['form-group'] do %>

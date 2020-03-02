@@ -14,9 +14,40 @@
   </div>
 
   <div data-hook="admin_user_wallet_edit_form">
-    <%= form_for [:admin, @user], as: :user, url: wallets_admin_user_url(@user), method: :put do |f| %>
+    <%= form_tag( wallets_actions_admin_user_url(@user), method: :put) do |f| %>
       <%= render partial: 'wallet_form', locals: { f: f } %>
-
-    <% end %>
+      <% if can?(:update, @user) %>
+        <div class="text-align-center">
+            <%= button_tag I18n.t('spree.admin.user.payment_wallet.actions.change_default_payment'), {:class => "btn", :name => "submit", :value => "change_default_payment"} %>
+            <%= button_tag I18n.t('spree.admin.user.payment_wallet.actions.remove_card'), {:class => "btn", :name => "submit", :value => "remove_card"} %>
+          <% end %>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#show_add_modal"><%= I18n.t('spree.admin.user.payment_wallet.actions.add_card') %></button>
+        </div>
+      <% end %>
   </div>
 </fieldset>
+
+<!-- Modal add_card-->
+<div class="modal fade" id="show_add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><%= I18n.t("spree.admin.user.payment_wallet.actions.add_card") %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_tag( addcard_admin_user_url(@user), method: :put , id: 'new_card') do %>
+        <div class="modal-body">
+          <div style="display: inline-block">
+            <%= render partial: "spree/admin/users/payment_stripe", locals: { payment_method: Spree::PaymentMethod.find_by(type: 'Spree::PaymentMethod::StripeCreditCard', deleted_at: nil) } %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="add_card_button" type="submit" class="btn btn btn-primary change_several_products"> <%= I18n.t("spree.admin.user.payment_wallet.actions.add") %> </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

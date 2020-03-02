@@ -1,6 +1,6 @@
 Spree.user_class.class_eval do
 
-  belongs_to :supplier, class_name: 'Spree::Supplier'
+  belongs_to :supplier, class_name: 'Spree::Supplier', optional: true
 
   has_many :variants, through: :supplier
 

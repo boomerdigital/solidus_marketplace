@@ -23,9 +23,6 @@
                     }
                 )
               %>
-
-
-
             <% end %>
 
             </tbody>
@@ -35,17 +32,9 @@
             <%= Spree.t(:no_payment_methods) %>
           </div>
         <% end %>
-        <% if can?(:update, @user) %>
-            <div class="text-align-center">
-              <div id='new_wallet_link'>
-                <%= link_to Spree.t(:add_new_payment_method), spree.addwallet_admin_user_path(@user), class: :button %>
-                <%= link_to Spree.t(:remove_payment_method), {controller: :users, action: :removewallet}, "data-confirm": Spree.t(:are_you_sure), class: :button %>
-              </div>
-            </div>
-        <% end %>
-
     </fieldset>
   </div>
 
-
 </div>
+
+

@@ -6,7 +6,8 @@ es:
         commission_percentage: Porcentaje de comisión
         name: Nombre
         tax_id: TAX ID
-        url: URL
+        user_admin: Usuario administrador
+        users: Usuarios
         address1: Dirección
         address2: Dirección (continuación)
         city: Ciudad
@@ -45,6 +46,18 @@ es:
   spree:
     admin:
       user:
+        payment_wallet:
+          actions:
+            change_default_payment: Cambiar tarjeta por defecto
+            successfully_change_default_payment: Tarjeta camiada
+            error_change_default_payment: Ha habido un error cambiando la tarjeta
+            remove_card: Borrar tarjeta
+            successfully_card_removed: Tarjeta eliminada
+            error_card_removed: Ha habido un error borrando la tarjeta
+            error_add_card: Ha habido un error añadiendo la tarjeta
+            success_add_card: Tarjeta añadida
+            add_card: Añadir tarjeta
+            add: Añadir
         wallets: Métodos de Pago
       marketplace_settings:
         update:

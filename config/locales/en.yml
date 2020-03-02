@@ -6,6 +6,7 @@ en:
         commission_percentage: Commission Percentage
         name: Name
         tax_id: TAX ID
+        user_admin: Admin user
         url: URL
     models:
       spree/supplier:
@@ -21,6 +22,18 @@ en:
   spree:
     admin:
       user:
+        payment_wallet:
+          actions:
+            change_default_payment: Change default card
+            successfully_change_default_payment: Card has be changed
+            error_change_default_payment: Something wrong changing card
+            remove_card: Remove Card
+            successfully_card_removed: Card removed
+            error_card_removed: Something wrong removing card
+            error_add_card: Something wrong adding card
+            success_add_card: Tarjeta añadida
+            add_card: Add card
+            add: Add
         wallets: Payment Methods
       tab:
         stock_locations: Stock Locations
