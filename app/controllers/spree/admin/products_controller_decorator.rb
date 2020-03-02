@@ -2,7 +2,7 @@ Spree::Admin::ProductsController.class_eval do
 
   before_action :get_suppliers,            only: [:edit] #, :update]
   before_action :supplier_collection,      only: [:index]
-  after_action  :update_product_suppliers, only: [:update]
+  after_action  :update_product_suppliers, only: [:update], unless: -> { params['product']['supplier_ids'].nil? }
   create.after  :add_product_to_supplier
 
   private

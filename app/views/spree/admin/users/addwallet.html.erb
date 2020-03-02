@@ -1,0 +1,27 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::LegacyUser), spree.admin_users_path) %>
+<% admin_breadcrumb(link_to @user.email, edit_admin_user_url(@user)) %>
+<% admin_breadcrumb(plural_resource_name(Spree::Address)) %>
+
+
+<%= render 'spree/admin/users/sidebar' %>
+<%= render 'spree/admin/users/tabs', current: :wallet %>
+<%= render partial: 'spree/admin/users/user_page_actions' %>
+
+<fieldset data-hook="admin_user_wallets" id="admin_user_edit_wallet">
+
+  <div data-hook="admin_user_edit_form_header">
+    <%= render partial: 'spree/shared/error_messages', locals: { target: @user } %>
+  </div>
+
+  <div data-hook="admin_user_wallet_edit_form">
+    <%= form_for [:admin, @user], as: :user, url: wallets_admin_user_url(@user), method: :put do |f| %>
+      <%= render partial: 'wallet_form', locals: { f: f } %>
+
+      <% if can?(:update, @user) %>
+        <div data-hook="admin_user_edit_form_button">
+          <%= render partial: 'spree/admin/shared/edit_resource_links', locals: { collection_url: admin_users_url } %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</fieldset>

@@ -11,6 +11,8 @@ Spree::Admin::ReportsController.class_eval do
     end
   end
 
+
+
   def earnings_csv
     header1 = ["Supplier Earnings"]
     header2 = ["Supplier", "Earnings", "Paypal Email"]

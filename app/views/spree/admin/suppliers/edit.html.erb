@@ -10,6 +10,8 @@
 
 <%= render 'spree/shared/error_messages', target: @object %>
 
+<%= link_to Spree.t(:user), edit_admin_user_path(@object.user) , class:"button primary"%>
+
 <%= form_for [:admin, @object] do |f| %>
   <%= render "form", form: f %>
   <div data-hook="supplier_right_column_wrapper" class="col-md-4"></div>

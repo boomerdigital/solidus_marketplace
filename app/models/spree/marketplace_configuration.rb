@@ -1,6 +1,9 @@
 module Spree
   class MarketplaceConfiguration < Preferences::Configuration
-
+    
+    # Determines if send orders directly to supplier.
+    preference :automatically_deliver_orders_to_supplier, :boolean, default: true
+    
     # Default flat rate to charge suppliers per order for commission.
     preference :default_commission_flat_rate, :float, default: 0.0
 

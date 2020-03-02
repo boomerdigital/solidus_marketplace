@@ -41,7 +41,7 @@ namespace :spree_sample do
     5.times{|i|
       name = "Supplier #{count + i + 1}"
       supplier = Spree::Supplier.new(:name => name,
-                                   :email => "#{name.parameterize}@example.com",
+                                   :user_id => 1,
                                    :url => "http://example.com")
       supplier.build_address(:firstname => name, :lastname => name,
                              :address1 => "100 State St",

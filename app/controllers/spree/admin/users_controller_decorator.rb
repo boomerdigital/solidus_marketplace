@@ -86,7 +86,6 @@ Spree::Admin::UsersController.class_eval do
       flash[:error] = I18n.t('spree.admin.user.payment_wallet.actions.error_add_card')
       redirect_to spree.wallets_admin_user_path(@user)
     end
-
   end
 
   private
