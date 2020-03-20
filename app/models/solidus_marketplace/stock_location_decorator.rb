@@ -4,7 +4,7 @@ module SolidusMarketplace
 
     included do
       prepend(InstanceMethods)
-      belongs_to :supplier, class_name: 'Spree::Supplier'
+      belongs_to :supplier, class_name: 'Spree::Supplier', optional: true
       scope :by_supplier, -> (supplier_id) { where(supplier_id: supplier_id) }
     end
 

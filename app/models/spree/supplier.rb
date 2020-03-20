@@ -5,7 +5,7 @@ module Spree
 
     attr_accessor :password, :password_confirmation
 
-    belongs_to :user, class_name: Spree.user_class.to_s
+    belongs_to :user, class_name: Spree.user_class.to_s, optional: true
     belongs_to :admin, class_name: Spree.user_class.to_s
     belongs_to :address, class_name: 'Spree::Address'
     accepts_nested_attributes_for :address
@@ -34,6 +34,8 @@ module Spree
     after_create :assign_user
     after_create :create_stock_location
     after_create :send_welcome, if: -> { SolidusMarketplace::Config[:send_supplier_email] }
+
+    self.whitelisted_ransackable_attributes = %w[name]
 
     scope :active, -> { where(active: true) }
 
@@ -67,7 +69,7 @@ module Spree
 
     def assign_user
       if self.users.empty?
-        self.users << self.user
+        self.users << self.admin
         self.save
       end
     end

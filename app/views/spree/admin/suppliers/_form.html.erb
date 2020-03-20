@@ -25,7 +25,7 @@
         <div data-hook='admin_supplier_form_user_admin'>
           <%= f.field_container :user do %>
             <%= f.label :user_admin %>
-            <%= hidden_field_tag 'supplier[user_id]',
+            <%= hidden_field_tag 'supplier[admin_id]',
                                  f.object.user_ids.join(','),
                                  class: 'user_picker fullwidth' %>
           <% end %>

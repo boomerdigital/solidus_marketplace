@@ -40,9 +40,12 @@ namespace :spree_sample do
     puts 'Creating Suppliers...'
     5.times{|i|
       name = "Supplier #{count + i + 1}"
+      user = Spree::User.create(email: "supplier#{i}@example.com", password: 'test123')
+      user.spree_roles << Spree::Role.first
       supplier = Spree::Supplier.new(name: name,
-                                     user_id: 1,
-                                     url: 'http://example.com')
+                                     user_id: user.id,
+                                     url: 'http://example.com',
+                                     admin: user)
       supplier.build_address(firstname: name,
                              lastname: name,
                              address1: '100 State St',

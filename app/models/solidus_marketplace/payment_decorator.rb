@@ -3,7 +3,7 @@ module SolidusMarketplace
     extend ActiveSupport::Concern
 
     included do
-      belongs_to :payable, polymorphic: true
+      belongs_to :payable, polymorphic: true,  optional: true
     end
   end
 end

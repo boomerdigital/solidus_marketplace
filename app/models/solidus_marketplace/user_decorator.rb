@@ -4,8 +4,10 @@ module SolidusMarketplace
 
     included do
       prepend(InstanceMethods)
-      belongs_to :supplier, class_name: 'Spree::Supplier'
+      belongs_to :supplier, class_name: 'Spree::Supplier', optional: true
       has_many :variants, through: :supplier
+
+      after_create :check_for_api_token
     end
 
     module InstanceMethods
@@ -23,6 +25,10 @@ module SolidusMarketplace
 
       def has_admin_role?
         spree_roles.map(&:name).include?("admin")
+      end
+
+      def check_for_api_token
+        generate_spree_api_key! if supplier_admin? || supplier?
       end
     end
   end
