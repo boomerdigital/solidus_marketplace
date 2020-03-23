@@ -26,6 +26,7 @@ module SolidusMarketplace
           elsif removing_suppliers?
             supplier_ids = current_supplier_ids - new_supplier_ids
             @product.remove_suppliers!(supplier_ids)
+            @product.add_suppliers!(new_supplier_ids) if new_supplier_ids
           elsif same_number_of_suppliers? && different_suppliers?
             @product.remove_suppliers!(current_suppliers)
             @product.add_suppliers!(new_suppliers)
@@ -78,9 +79,15 @@ module SolidusMarketplace
 
         # Newly added products by a Supplier are associated with it.
         def add_product_to_supplier
-          if try_spree_current_user && try_spree_current_user.supplier?
+          if try_spree_current_user&.supplier?
            @product.add_supplier!(try_spree_current_user.supplier_id)
+          elsif user_admin?
+            @product.add_suppliers!(new_supplier_ids)
           end
+        end
+
+        def user_admin?
+          try_spree_current_user.admin?
         end
       end
     end
