@@ -48,7 +48,7 @@ module SolidusMarketplace
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      Spree::Ability.register_ability(Spree::SupplierAbility)
+      Spree::Config.roles.assign_permissions :supplier_admin, ['Spree::PermissionSets::SupplierAbility']
     end
 
     config.to_prepare(&method(:activate).to_proc)
