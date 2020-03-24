@@ -1,0 +1,93 @@
+<% admin_breadcrumb(plural_resource_name(Spree::Shipment)) %>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
+
+<%# Update search form with new markup %>
+<% content_for :table_filter do %>
+  <div data-hook="admin_shipments_index_search">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="row">
+        <div class="date-range-filter col-md-6">
+          <div class="form-group">
+            <%= label_tag :q_created_at_gt, Spree.t(:date_range) %>
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.text_field :created_at_gt, :class => 'datepicker datepicker-from form-control', :value => params[:q][:created_at_gt], :placeholder => Spree.t(:start) %>
+              </div>
+              <div class="col-md-6">
+                <%= f.text_field :created_at_lt, :class => 'datepicker datepicker-to form-control', :value => params[:q][:created_at_lt], :placeholder => Spree.t(:stop) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag nil, Spree.t(:shipment_number) %>
+            <%= f.text_field :number_cont , class: 'form-control js-quick-search-target'%>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag nil, Spree.t(:status) %><br/>
+            <%= f.select :state_eq, Spree::Shipment.state_machines[:state].states.collect {|s| [Spree.t("shipment_state.#{s.name}"), s.value]}, {:include_blank => true}, :class => 'select2' %>
+          </div>
+        </div>
+      </div>
+
+      <div data-hook="admin_shipments_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:filter_results), 'search' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%# This is a new paginate! %>
+<%= paginate @shipments, theme: "solidus_admin" %>
+
+<% unless @shipments.empty? %>
+  <table class="table" id="listing_shipments" data-hook>
+    <thead>
+    <tr data-hook="admin_orders_index_headers">
+      <th><%= sort_link @search, :created_at,  Spree::Shipment.human_attribute_name(:created_at) %></th>
+      <th><%= sort_link @search, :number,  Spree::Shipment.human_attribute_name(:number) %></th>
+      <th><%= sort_link @search, :state,  Spree::Shipment.human_attribute_name(:state) %></th>
+      <th><%= sort_link @search, :item_cost,  Spree::Shipment.human_attribute_name(:item_cost) %></th>
+      <th><%= sort_link @search, :shipping_total,  Spree::Shipment.human_attribute_name(:cost) %></th>
+      <th><%= sort_link @search, :tax_total,  Spree::Shipment.human_attribute_name(:tax_total) %></th>
+      <th><%= sort_link @search, :total,  Spree::Shipment.human_attribute_name(:final_price) %></th>
+      <th><%= sort_link @search, :supplier_commission,  Spree::Shipment.human_attribute_name(:supplier_commission) %></th>
+      <th data-hook="admin_shipments_index_header_actions" class="actions"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @shipments.each do |shipment| %>
+      <tr data-hook="admin_shipments_index_rows" class="state-<%= shipment.state.downcase %> <%= cycle('odd', 'even') %>">
+        <td><%= l shipment.created_at.to_date %></td>
+        <td><%= link_to shipment.number, spree.edit_admin_shipment_path(shipment) %></td>
+        <td><span class="state <%= shipment.state.downcase %>"><%= Spree.t("shipment_state.#{shipment.state.downcase}") %></span></td>
+        <td> <%= shipment.display_item_cost.to_html %></td>
+        <td ><%= shipment.display_cost.to_html %></td>
+        <td><%= Spree::Money.new(shipment.tax_total, currency: shipment.currency).to_html %></td>
+        <td><%= Spree::Money.new(shipment.final_price_with_items, currency: shipment.currency).to_html %></td>
+        <td><%= Spree::Money.new(shipment.supplier_commission, currency: shipment.currency).to_html %></td>
+        <td data-hook="admin_shipments_index_row_actions">
+          <%= link_to_edit_url spree.edit_admin_shipment_path(shipment), :title => "admin_edit_#{dom_id(shipment)}", :no_text => true %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%# New alert 'Not Found' with i18n %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: Spree::Shipment.model_name.human(count: :many)) %>,
+  </div>
+<% end %>
+
+<%# This is a new paginate! %>
+<%= paginate @shipments, theme: "solidus_admin" %>
