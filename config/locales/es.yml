@@ -2,150 +2,126 @@ es:
   activerecord:
     attributes:
       spree/supplier:
-        commission_flat_rate: Tarifa fija de comisión
-        commission_percentage: Porcentaje de comisión
         name: Nombre
-        tax_id: TAX ID
+        tax_id: ID de impuestos (ej RFC)
         user_admin: Usuario administrador
-        users: Usuarios
-        address1: Dirección
-        address2: Dirección (continuación)
-        city: Ciudad
-        commission: Comisión
-        country: País
-        email: Email
-        state: Estado
-        active: Activo
         url: URL
-        zipcode: Código Postal(ZipCode)
-        supplier_info: Información de proveedor
-        supplier_signup: Registro de proveedor
-        suppliers: Proveedores
-      spree/shipment:
-        created_at: Creado
-        number: Número
-        state: Estatus
-        item_cost: Costo ítem
-        cost: Costo
-        total_tax: Total impuesto
-        final_price: Precio final
-        supplier_commission: Comisión Proveedor
+    models:
+      spree/supplier:
+        one: Proveedor
+        other: Proveedores
     errors:
       models:
         spree/supplier:
           attributes:
             url:
-              invalid: es inválido. Por favor asegúrece que 'http://' esté incluido
-              not_responding: 'es inválido, no responde o ha redireccionado a otra url'
-  marketplace_order_number: "Mercado Orden #%{number}"
-  marketplace_orders: Mercado Ordenes
-  marketplace_settings: Mercado Configuración
-  must_be_logged_in: 'Debe Estar Autenticado'
-  signup: Registro
-  signup_to_become_a_supplier: 'Autentíquese para ser un Proveedor'
+              invalid: es inválido. Por favor asegúrese que incluya 'http://'
+              not_responding: es inválido, no responde o redirecciona a otra ubicación
   spree:
     admin:
       user:
         payment_wallet:
           actions:
-            change_default_payment: Cambiar tarjeta por defecto
-            successfully_change_default_payment: Tarjeta camiada
-            error_change_default_payment: Ha habido un error cambiando la tarjeta
-            remove_card: Borrar tarjeta
-            successfully_card_removed: Tarjeta eliminada
-            error_card_removed: Ha habido un error borrando la tarjeta
-            error_add_card: Ha habido un error añadiendo la tarjeta
+            change_default_payment: Cambiar el método de pago predeterminado
+            successfully_change_default_payment: El método de pago predeterminado ha sido cambiada con éxito
+            error_change_default_payment: Ocurrió un error con el método de pago
+            remove_card: Remover tarjeta
+            successfully_card_removed: Tarjeta removida
+            error_card_removed: Ocurrió un problema removiendo la tarjeta
+            error_add_card: Ocurrió un problema agregando al carrito
             success_add_card: Tarjeta añadida
-            add_card: Añadir tarjeta
-            add: Añadir
-        wallets: Métodos de Pago
+            add_card: Agregar tarjeta
+            add: Agregar
+        wallets: Métodos de pago
+      tab:
+        stock_locations: Almacenes
+        suppliers: Proveedores
+        shipments: Envíos
+        profile: Perfil
+        earnings: Ganancias
       marketplace_settings:
         update:
-          success: Configuración mercado actualizada correctamente
+          success: Configuración de mercado actualizada correctamente
       orders:
-        marketplace_order_order_header:
-          marketplace_order_ids: DSO IDs
         edit:
-          approve_marketplace_orders: Ordenes aprobadas por el proveedor
-          resend_marketplace_orders: Reenviar ordenes al proveedor
-          marketplace_order_approval_confirmation: Se le enviará una notificación por correo electrónico a cada proveedor. ¿Desea continuar?
+          approve_marketplace_orders: Aprobar órdenes de mercado
+          resend_marketplace_orders: Reenviar órdenes de mercado
+          marketplace_order_approval_confirmation: Esto enviará una notificación por email a cada proveedor. ¿Continuar?
         show:
-          approve_marketplace_orders: Ordene aprobadas por el proveedor
-          resend_marketplace_orders: Reenviar ordenes al proveedor
-          marketplace_order_approval_confirmation: Se le enviará una notificación por correo electrónico a cada proveedor. ¿Desea continuar?
-      suppliers:
-        edit:
-          back_to_suppliers: Regresar a los proveedores 
-        new:
-          new_supplier: Nuevo Proveedor
-        form:
-          supplier_details: Detalles del Proveedor
-          supplier_address: Dirección del Proveedor
-      marketplace_orders:
-        deliver:
-          error: "La orden %{number} no pudo ser enviada al proveedor."
-          success: "La orden %{number} fue enviada al proveedor."
-        orders_sent: Todas las ordenes fueron enviadas a los proveedores
-        orders_not_sent: Algunas o todas las ordenes no pudieron ser enviadas. Por favor contacte directamente al proveedor.
-    back_to_orders_list: Regresar a las ordenes
-    back_to_suppliers: Regresar a los proveedores
+          approve_marketplace_orders: Aprobar órdenes de mercado
+          resend_marketplace_orders: Reenviar órdenes de mercado
+          marketplace_order_approval_confirmation: Esto enviará una notificación por email a cada proveedor. ¿Continuar?
+    active: Activo
+    address: Dirección
+    admins: Administradores
+    back_to_orders_list: Volver a Lista de órdenes
+    back_to_suppliers: Volver a Proveedores
     business: Negocio
     cancel: Cancelar
-    company_info: Informacion de la compañia
-    confirm_order: Confirmar Orden
+    company_info: Información de empresa
+    confirm_order: Confirmar orden
     contact_address: Dirección de contacto
-    drop_ship: Drop Ship
-    editing_supplier: Editar proveedor
-    default_commission_flat_rate: Comision por defecto
-    default_commission_percentage: Porcentaje de comision por defecto
-    automatically_deliver_orders_to_supplier: Enviar orden automaticamente a los proveedores
-    send_supplier_email: Enviar correo al proveedor
-    individual: Individual
-    listing_suppliers: Lista de proveedores
-    manage: Gestionar
-    name: Nombre
-    or: ó
-    suppliers: Proveedores
-    user_admin: Usuario Administrador
-    remove_payment_method: Eliminar tarjeta
-    add_payment_method: Añadir tarjeta de pago
-    listing_shipments: 'Lista de envíos'
-    order_state:
-      active: Activo
-      completed: Completado
-      confirmed: Confirmado
-      delivered: Entregado
-    resend_order_to_supplier: Reenviar orden al proveedor.
-    save: Guardar
-    search: Buscar
-    send_order_to_supplier: Enviar orden al proveedor.
-    show_only_incomplete_orders: Solo mostrar ordenes incompletas
-    supplier: Proveedor
-    supplier_information: Información del proveedor
+    automatically_deliver_orders_to_supplier: Entregar pedidos automáticamente al proveedor
+    send_supplier_email: Enviar email de bienvenida a nuevos proveedores
+    default_commission_percentage: Porcentaje de comisión predeterminado
+    default_commission_flat_rate: Tarifa de comisión predeterminada
+    drop_ship: Envío directo
+    earnings: Ganancias
+    earnings_description: Ganancias para proveedores en lapso de tiempo especificado
+    export_supplier_csv: Exportar ganancias como CSV
     marketplace_order_mailer:
       supplier_order:
-        hello: "Hola %{name},"
-        subject: "%{name} Orden al proveedor #%{number}"
-        thank_you_again: "Gracias nuevamente por su negocio, <b>%{name}</b>"
+        hello: "Hola, %{name},"
+        subject: "%{name}, orden de mercado #%{number}"
+        thank_you_again: "Gracias de nuevo por confiar en nosotros, <b>%{name}</b>"
+    marketplace_order_number: "Orden de mercado #%{number}"
+    marketplace_orders: Órdenes de mercado
+    marketplace_settings: Configuración de mercado
+    editing_supplier: Editando proveedor
+    inactive: Incativo
+    individual: Individual
+    manage: Administrar
+    must_be_logged_in: Debe iniciar sesión
+    name: Nombre
+    new_supplier: Nuevo proveedor
+    or: o
+    order_state:
+      active: Activa
+      completed: Completada
+      confirmed: Confirmada
+      delivered: Entregada
+    resend_order_to_supplier: Reenviar orden a proveedor
+    save: Guardar
+    search: Buscar
+    send_order_to_supplier: Enviar orden a proveedor
     shared:
       unauthorized:
-        explained: Usted no está autorizado a acceder a esta página.
+        explained: No está autorizado para acceder a esta página
         unauthorized: No autorizado
+    show_only_incomplete_orders: Mostrar solo órdenes incompletas
+    signup: Registrarse
+    signup_to_become_a_supplier: Regístrese para convertirse en proveedor
+    supplier: Proveedor
+    supplier_details: Detalles de proveedor
+    supplier_earnings: Ganancias de proveedor
+    supplier_information: Información de proveedor
     supplier_mailer:
       welcome:
-        hello: "Hola %{name},"
-        check_your_status: Puede revisar el estado de su pedido por
-        logging_into_your_account: Autentíquese.
-        once_your_request_is_approved: Una vez que su pedido sea aprobado podrá gestionar su inventario.
-        subject: 'Gracias por autenticarse. Por favor verifique la información.'
-        thank_you_again: "Gracias nuevamente por su negocio, <b>%{name}</b>"
-        thank_you_for_signing_up: Gracias por autenticarse para ser un proveedor.
-    suppliers:
-      already_signed_up: "Ya está autenticado para convertirse en un proveedor."
-      create:
-        success: Gracias por autenticarse!
+        hello: "Hola, %{name},"
+        logging_into_your_account: iniciando sesión en su cuenta
+        manage_your_account: Ahora puede administrar su perfil e inventario
+        subject: Gracias por registrarse. Por favor verifique su información.
+        thank_you_again: "Gracias de nuevo por confiar en nosotros, <b>%{name}</b>"
+        thank_you_for_signing_up: Gracias por registrarse como proveedor
+    supplier_paypal_email: Email asociado a PayPal
+    supplier_placeholder: Agregar proveedor
     supplier_registration:
-      already_signed_up: "Ya inicio sesión como proveedor."
+      already_signed_up: Ya se ha registrado para convertirse en proveedor
       create:
-        invalid_password: Clave incorrecta por favor inicie sesion.
+        invalid_password: Contraseña no válida, por favor inicie sesión o regístrese
         success: Gracias por registrarse!
+    supplier_signup: Registro de proveedor
+    suppliers: Proveedores
+    user_admin: Usuario administrador
+    remove_payment_method: Remover método de pago
+    add_payment_method: Agregar método de pago
