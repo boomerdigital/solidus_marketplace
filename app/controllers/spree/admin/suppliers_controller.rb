@@ -7,7 +7,6 @@ module Spree
       private
 
       def set_address
-        address_attributes = permitted_resource_params.delete(:address_attributes)
         @object.address = Spree::Address.immutable_merge(@object.address,
                                                          permitted_resource_params.delete(:address_attributes))
       end
