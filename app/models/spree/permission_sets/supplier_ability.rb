@@ -17,7 +17,8 @@ module Spree
         # can [:admin, :manage, :read, :ready, :ship], Spree::Shipment, order: { state: 'complete' }, stock_location: { supplier_id: user.supplier_id }
         # can [:admin, :create, :update], :stock_items
         can [:admin, :index, :create, :edit, :read, :update], Spree::StockItem, stock_location: {supplier_id: user.supplier_id}
-        can [:admin, :manage, :create], Spree::StockLocation, supplier_id: user.supplier_id
+        cannot :display, Spree::StockLocation, active: true
+        can [:admin, :manage, :create], Spree::StockLocation, supplier_id: user.supplier_id, active: true
         can [:admin, :manage, :create], Spree::StockMovement, stock_item: {stock_location: {supplier_id: user.supplier_id}}
 
         can [:admin, :create, :read, :update, :display], Spree::Supplier, id: user.supplier_id
@@ -27,7 +28,7 @@ module Spree
         can [:display, :admin, :sales_total], :reports
 
         # can [:admin, :manage],       Spree::User,  supplier_id: user.supplier_id
-        can [:admin, :index, :edit, :update], Spree::Order, stock_locations: {supplier_id: user.supplier_id}
+        can [:admin, :index, :edit, :update], Spree::Order, stock_locations: { supplier_id: user.supplier_id }
         # can [:admin, :index], Spree::Order, supplier_ids: user.supplier_id
         # can [:admin, :edit], Spree::Order, stock_locations: { supplier_id: user.supplier_id }
       end
