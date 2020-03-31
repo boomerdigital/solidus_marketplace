@@ -6,7 +6,7 @@ module Spree
     attr_accessor :password, :password_confirmation
 
     belongs_to :user, class_name: Spree.user_class.to_s, optional: true
-    belongs_to :admin, class_name: Spree.user_class.to_s
+    belongs_to :admin, class_name: Spree.user_class.to_s, optional: true
     belongs_to :address, class_name: 'Spree::Address'
     accepts_nested_attributes_for :address
 
@@ -22,6 +22,7 @@ module Spree
     has_many :shipments, through: :stock_locations
     has_many :users, class_name: Spree.user_class.to_s
     has_many :admins, class_name: Spree.user_class.to_s
+    accepts_nested_attributes_for :admins
 
     validates :commission_flat_rate, presence: true
     validates :commission_percentage, presence: true
