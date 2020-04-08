@@ -31,6 +31,7 @@ module Spree
         can [:admin, :index, :edit, :update], Spree::Order, stock_locations: { supplier_id: user.supplier_id }
         # can [:admin, :index], Spree::Order, supplier_ids: user.supplier_id
         # can [:admin, :edit], Spree::Order, stock_locations: { supplier_id: user.supplier_id }
+        can [:admin, :manage, :create], Spree::Image
       end
     end
   end
