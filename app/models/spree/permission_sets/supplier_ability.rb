@@ -5,7 +5,7 @@ module Spree
       def activate!
         can [:admin, :update, :read, :display, :stock], Spree::Product, suppliers: {id: user.supplier_id}
         can [:admin, :create], Spree::Product
-        can [:admin, :create, :update, :destroy, :display], Spree::Variant, suppliers: {id: user.supplier_id}
+        can [:admin, :create, :update, :destroy, :display], Spree::Variant
 
         can [:admin, :display, :index], Spree::Shipment, order: {state: 'complete'},
             stock_location: {supplier_id: user.supplier_id}
