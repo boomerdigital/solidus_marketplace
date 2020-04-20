@@ -8,7 +8,7 @@ module Spree
         can [:admin, :create, :update, :destroy, :display], Spree::Variant
 
         can [:admin, :display, :index], Spree::Shipment, order: {state: 'complete'},
-            stock_location: {supplier_id: user.supplier_id}
+            stock_location: { supplier_id: user.supplier_id }
 
         can [:admin, :display], Spree::ReturnAuthorization, stock_location: {supplier_id: user.supplier_id}
         can [:admin, :display], Spree::CustomerReturn, stock_location: {supplier_id: user.supplier_id}
@@ -28,7 +28,7 @@ module Spree
         can [:display, :admin, :sales_total], :reports
 
         # can [:admin, :manage],       Spree::User,  supplier_id: user.supplier_id
-        can [:admin, :index, :edit, :update], Spree::Order, stock_locations: { supplier_id: user.supplier_id }
+        can [:admin, :index, :edit, :update, :cancel, :show, :cart, :resend, :fire], Spree::Order, stock_locations: { supplier_id: user.supplier_id }
         # can [:admin, :index], Spree::Order, supplier_ids: user.supplier_id
         # can [:admin, :edit], Spree::Order, stock_locations: { supplier_id: user.supplier_id }
         can [:admin, :manage, :create], Spree::Image
