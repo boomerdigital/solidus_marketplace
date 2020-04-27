@@ -18,7 +18,7 @@ Basic functionality:
 
 Installation
 ------------
-Here's how to install solidus_marketplace into your existing spree site AFTER you've installed Spree:
+Here's how to install solidus_marketplace into your existing solidus site AFTER you've installed Solidus:
 
 Add the following to your Gemfile:
 
