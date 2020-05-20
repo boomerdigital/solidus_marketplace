@@ -36,7 +36,7 @@ module Spree
     after_create :create_stock_location
     after_create :send_welcome, if: -> { SolidusMarketplace::Config[:send_supplier_email] }
 
-    self.whitelisted_ransackable_attributes = %w[name]
+    self.whitelisted_ransackable_attributes = %w[name active]
 
     scope :active, -> { where(active: true) }
 
