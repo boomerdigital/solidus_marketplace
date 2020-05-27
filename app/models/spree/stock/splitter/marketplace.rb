@@ -10,13 +10,17 @@ module Spree
               # Package fulfilled items together.
               fulfilled = package.contents.select { |content|
                 begin
-                  content.variant.suppliers.count == 0
+                  content.variant.suppliers.count == 0 ||
+                  content.variant.suppliers.detect { |supplier| supplier.stock_locations_with_available_stock_items(content.variant).empty? }
                 rescue => e
                 end
               }
               split_packages << build_package(fulfilled)
               # Determine which supplier to package shipped items.
-              supplier_contents = package.contents.select { |content| content.variant.suppliers.count > 0 }
+              supplier_contents = package.contents.select do |content|
+                content.variant.suppliers.count > 0 &&
+                content.variant.suppliers.detect { |supplier| supplier.stock_locations_with_available_stock_items(content.variant).any? }
+              end
               supplier_contents.each do |content|
                 # Select the related variant
                 variant = content.variant
