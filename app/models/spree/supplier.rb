@@ -15,10 +15,10 @@ module Spree
       has_many :ckeditor_attachment_files
     end
 
-    has_many :supplier_variants
+    has_many :supplier_variants, dependent: :destroy
     has_many :variants, through: :supplier_variants
     has_many :products, through: :variants
-    has_many :stock_locations
+    has_many :stock_locations, dependent: :destroy
     has_many :shipments, through: :stock_locations
     has_many :users, class_name: Spree.user_class.to_s
     has_many :admins, class_name: Spree.user_class.to_s
