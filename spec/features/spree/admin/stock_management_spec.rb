@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Stock Management', type: :feature, js: true do
+describe 'Stock Management', type: :feature, js: true do
   let(:user) { create(:supplier_user) }
 
   before do

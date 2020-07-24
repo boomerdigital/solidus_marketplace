@@ -10,7 +10,7 @@ $.fn.supplierAutocomplete = function () {
 
       Spree.ajax({
         type: "GET",
-        url: Spree.routes.suppliers_search,
+        url: suppliers_search,
         data: {
           ids: ids,
           per_page: count
@@ -21,7 +21,7 @@ $.fn.supplierAutocomplete = function () {
       });
     },
     ajax: {
-      url: Spree.routes.suppliers_search,
+      url: suppliers_search,
       datatype: 'json',
       data: function (term, page) {
         return {

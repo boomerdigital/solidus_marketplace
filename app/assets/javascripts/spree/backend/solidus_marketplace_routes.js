@@ -1,1 +1,1 @@
-Spree.routes.suppliers_search = Spree.pathFor('api/suppliers')
+suppliers_search = Spree.pathFor('api/suppliers')

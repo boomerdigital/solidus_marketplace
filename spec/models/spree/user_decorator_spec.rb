@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree.user_class do
+describe Spree.user_class do
   it { is_expected.to respond_to(:supplier) }
   it { is_expected.to respond_to(:variants) }
 

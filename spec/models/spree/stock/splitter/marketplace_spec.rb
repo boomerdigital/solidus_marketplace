@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Stock::Splitter::Marketplace do
+describe Spree::Stock::Splitter::Marketplace do
   let(:stock_location) { create(:stock_location) }
   let(:supplier1) { create(:supplier, stock_locations: [stock_location]) }
   let(:supplier2) { create(:supplier, stock_locations: [stock_location]) }

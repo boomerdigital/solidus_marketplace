@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Supplier do
+describe Spree::Supplier do
   it { is_expected.to respond_to(:address) }
   it { is_expected.to respond_to(:products) }
   it { is_expected.to respond_to(:stock_locations) }
@@ -78,8 +78,8 @@ RSpec.describe Spree::Supplier do
       expect(supplier.commission_flat_rate.to_f).to eql(1.0)
       expect(supplier.commission_percentage.to_f).to eql(10.0)
       # With custom commission applied.
-      supplier.update_attributes(commission_flat_rate: 123,
-                                 commission_percentage: 25)
+      supplier.update(commission_flat_rate: 123,
+                      commission_percentage: 25)
       expect(supplier.commission_flat_rate).to eql(123.0)
       expect(supplier.commission_percentage).to eql(25.0)
     end
