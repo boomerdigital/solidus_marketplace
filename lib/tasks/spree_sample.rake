@@ -41,7 +41,7 @@ namespace :spree_sample do
     5.times{|i|
       name = "Supplier #{count + i + 1}"
       user = Spree::User.create(email: "supplier#{i}@example.com", password: 'test123')
-      user.spree_roles << Spree::Role.first
+      user.spree_roles << Spree::Role.find_by(name: "supplier_admin")
       supplier = Spree::Supplier.new(name: name,
                                      user_id: user.id,
                                      url: 'http://example.com',
