@@ -1,6 +1,49 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :supplier, class: Spree::Supplier do
+    sequence(:name) { |i| "Big Store #{i}" }
+    user
+    url { 'http://example.com' }
+    address
+    commission_flat_rate { 0.0 }
+    commission_percentage { 10.0 }
+    # Creating a stock location with a factory instead of letting the model handle it
+    # so that we can run tests with backorderable defaulting to true.
+    before :create do |supplier|
+      supplier.stock_locations << build(:stock_location,
+                                        name: supplier.name,
+                                        supplier: supplier)
+    end
+
+    factory :supplier_with_commission do
+      commission_flat_rate { 0.5 }
+      commission_percentage { 10 }
+    end
+  end
+
+  factory :supplier_user, parent: :user do
+    supplier
+  end
+
+  factory :supplier_admin_role, parent: :role do
+    name { 'supplier_admin' }
+  end
+
+  factory :supplier_admin, parent: :user do
+    supplier
+
+    after :create do |user|
+      user.spree_roles << create(:supplier_admin_role)
+    end
+  end
+
+  factory :variant_with_supplier, parent: :variant do
+    after :create do |variant|
+      variant.product.add_supplier! create(:supplier)
+    end
+  end
+
   factory :order_from_supplier, parent: :order do
     bill_address
     ship_address
@@ -58,49 +101,6 @@ FactoryBot.define do
           end
         end
       end
-    end
-  end
-
-  factory :supplier, class: Spree::Supplier do
-    sequence(:name) { |i| "Big Store #{i}" }
-    user
-    url { 'http://example.com' }
-    address
-    commission_flat_rate { 0.0 }
-    commission_percentage { 10.0 }
-    # Creating a stock location with a factory instead of letting the model handle it
-    # so that we can run tests with backorderable defaulting to true.
-    before :create do |supplier|
-      supplier.stock_locations << build(:stock_location,
-                                        name: supplier.name,
-                                        supplier: supplier)
-    end
-
-    factory :supplier_with_commission do
-      commission_flat_rate { 0.5 }
-      commission_percentage { 10 }
-    end
-  end
-
-  factory :supplier_user, parent: :user do
-    supplier
-  end
-
-  factory :supplier_admin_role, parent: :role do
-    name { 'supplier_admin' }
-  end
-
-  factory :supplier_admin, parent: :user do
-    supplier
-
-    after :create do |user|
-      user.spree_roles << create(:supplier_admin_role)
-    end
-  end
-
-  factory :variant_with_supplier, parent: :variant do
-    after :create do |variant|
-      variant.product.add_supplier! create(:supplier)
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin - Products', type: :feature, js: true do
+describe 'Admin - Products', type: :feature, js: true do
   let(:supplier1) { create(:supplier) }
   let(:supplier2) { create(:supplier) }
   let(:product) do

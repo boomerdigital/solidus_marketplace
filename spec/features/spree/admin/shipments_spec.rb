@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin - Shipments', type: :feature, js: true do
+describe 'Admin - Shipments', type: :feature, js: true do
   let!(:order) do
     order = build(:order_from_supplier_ready_to_ship,
                   state: 'complete',

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::StockLocation do
+describe Spree::StockLocation do
   it { is_expected.to respond_to(:supplier) }
 
   subject { create(:stock_location, backorderable_default: true) }

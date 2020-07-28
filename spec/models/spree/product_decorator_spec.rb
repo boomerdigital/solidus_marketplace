@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Product do
-  let(:product) { create :product }
+describe Spree::Product do
+  let!(:product) { create(:product) }
   let(:supplier1) { create(:supplier) }
   let(:supplier2) { create(:supplier) }
 

@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
+require 'spree/core'
+
+require 'solidus_marketplace'
+require 'solidus_marketplace/permitted_attributes'
+
 module SolidusMarketplace
   class Engine < Rails::Engine
-    isolate_namespace Spree
-    engine_name 'solidus_marketplace'
+    include SolidusSupport::EngineExtensions
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    isolate_namespace ::Spree
+    engine_name 'solidus_marketplace'
 
     # use rspec for tests
     config.generators do |g|
@@ -19,38 +24,30 @@ module SolidusMarketplace
     initializer 'solidus_marketplace.preferences', before: :load_config_initializers  do |app|
       SolidusMarketplace::Config = SolidusMarketplace::Configuration.new
       Spree::PermittedAttributes.singleton_class.prepend(SolidusMarketplace::PermittedAttributes)
+      Spree::Config.roles.assign_permissions :supplier_admin, ['Spree::PermissionSets::SupplierAbility']
     end
 
-    initializer 'solidus_marketplace.menu', before: :load_config_initializers  do |app|
-      Spree::Backend::Config.configure do |config|
+    initializer 'solidus_marketplace' do
+      next unless ::Spree::Backend::Config.respond_to?(:menu_items)
+      ::Spree::Backend::Config.configure do |config|
         config.menu_items << Spree::BackendConfiguration::MenuItem.new(
           [:stock_locations],
           'globe',
-          condition: -> { can?(:index, Spree::StockLocation) },
+          condition: -> { can?(:index, ::Spree::StockLocation) },
         )
 
         config.menu_items << Spree::BackendConfiguration::MenuItem.new(
           [:suppliers],
           'home',
-          condition: -> { can?(:index, Spree::Supplier) },
+          condition: -> { can?(:index, ::Spree::Supplier) },
         )
 
         config.menu_items << Spree::BackendConfiguration::MenuItem.new(
           [:shipments],
           'plane',
-          condition: -> { can?(:index, Spree::Shipment) },
+          condition: -> { can?(:index, ::Spree::Shipment) },
         )
       end
     end
-
-    def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-
-      Spree::Config.roles.assign_permissions :supplier_admin, ['Spree::PermissionSets::SupplierAbility']
-    end
-
-    config.to_prepare(&method(:activate).to_proc)
   end
 end

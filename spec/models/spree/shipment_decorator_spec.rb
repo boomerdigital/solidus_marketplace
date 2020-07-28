@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Shipment do
+describe Spree::Shipment do
   context 'Scopes' do
-    let(:supplier) { create(:supplier) }
+    let!(:supplier) { create(:supplier) }
     let(:stock_location_1) { supplier.stock_locations.first }
     let(:stock_location_2) { create(:stock_location, supplier: supplier) }
     let(:shipment_1) { create(:shipment) }

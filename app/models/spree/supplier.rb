@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   class Supplier < Spree::Base
     extend FriendlyId
@@ -70,7 +72,8 @@ module Spree
 
     def assign_user
       if self.users.empty?
-        self.users << self.admin
+        self.users << self.admin if self.admin
+        self.users << self.user if self.users.blank?
         self.save
       end
     end

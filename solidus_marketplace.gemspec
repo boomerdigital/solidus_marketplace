@@ -21,22 +21,15 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'solidus_core', ['>= 2.2', '< 3']
+  s.add_dependency 'solidus', ['>= 2.2', '< 3']
   s.add_dependency 'solidus_support'
   s.add_dependency 'deface', '~> 1.0'
 
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'capybara-screenshot'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_bot'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'poltergeist'
-  s.add_development_dependency 'puma'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'rubocop-rspec'
-  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency 'poltergeist'
+  s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'solidus_dev_support'
+  s.add_development_dependency 'vcr'
+  s.add_development_dependency 'webmock'
 end

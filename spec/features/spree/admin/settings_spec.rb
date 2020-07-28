@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin - Marketplace Settings', type: :feature do
+describe 'Admin - Marketplace Settings', type: :feature do
   let!(:user) { create(:admin_user) }
 
   before do
