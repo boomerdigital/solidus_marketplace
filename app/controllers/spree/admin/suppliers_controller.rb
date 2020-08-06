@@ -18,7 +18,7 @@ module Spree
       def collection
         params[:q] ||= {}
         @search = Spree::Supplier.search(params[:q])
-        @collection = @search.result.includes(:admins, :users).page(params[:page]).
+        @collection = @search.result.includes(:admins).page(params[:page]).
           per(Spree::Config[:orders_per_page])
       end
 
