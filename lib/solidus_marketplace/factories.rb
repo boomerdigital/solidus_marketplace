@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :supplier, class: Spree::Supplier do
     sequence(:name) { |i| "Big Store #{i}" }
-    user
     url { 'http://example.com' }
     address
     commission_flat_rate { 0.0 }
@@ -22,10 +21,6 @@ FactoryBot.define do
     end
   end
 
-  factory :supplier_user, parent: :user do
-    supplier
-  end
-
   factory :supplier_admin_role, parent: :role do
     name { 'supplier_admin' }
   end
@@ -35,6 +30,18 @@ FactoryBot.define do
 
     after :create do |user|
       user.spree_roles << create(:supplier_admin_role)
+    end
+  end
+
+  factory :supplier_staff_role, parent: :role do
+    name { 'supplier_staff' }
+  end
+
+  factory :supplier_staff, parent: :user do
+    supplier
+
+    after :create do |user| 
+      user.spree_roles << create(:supplier_staff_role)
     end
   end
 

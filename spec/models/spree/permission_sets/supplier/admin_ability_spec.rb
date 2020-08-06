@@ -4,7 +4,7 @@ require 'cancan'
 require 'cancan/matchers'
 require 'spree/testing_support/ability_helpers'
 
-describe Spree::PermissionSets::SupplierAbility do
+describe Spree::PermissionSets::Supplier::AdminAbility do
   let(:ability) { Spree::Ability.new(user) }
   let(:supplier) { create(:supplier) }
   let(:supplier_admin_role) { build(:role, name: 'supplier_admin') }

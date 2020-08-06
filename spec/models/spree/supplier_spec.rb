@@ -4,7 +4,6 @@ describe Spree::Supplier do
   it { is_expected.to respond_to(:address) }
   it { is_expected.to respond_to(:products) }
   it { is_expected.to respond_to(:stock_locations) }
-  it { is_expected.to respond_to(:users) }
   it { is_expected.to respond_to(:variants) }
 
   it '#deleted?' do
@@ -12,16 +11,6 @@ describe Spree::Supplier do
     expect(subject.deleted_at?).to eql(false)
     subject.deleted_at = Time.now
     expect(subject.deleted_at?).to eql(true)
-  end
-
-  context '#assign_user' do
-    let!(:supplier) { create(:supplier) }
-    let(:user) { supplier.user }
-
-    it 'returns assigned user' do
-      expect(supplier.users).not_to be_empty
-      expect(supplier.users.first).to eql(user)
-    end
   end
 
   context '#create_stock_location' do

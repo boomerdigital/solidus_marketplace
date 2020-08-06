@@ -9,7 +9,7 @@ module SolidusMarketplace
         end
 
         def index
-          @stock_locations = Spree::StockLocation.accessible_by(current_ability, :read)
+          @stock_locations = ::Spree::StockLocation.accessible_by(current_ability, :read)
                                                  .order('name ASC')
                                                  .ransack(params[:q])
                                                  .result
