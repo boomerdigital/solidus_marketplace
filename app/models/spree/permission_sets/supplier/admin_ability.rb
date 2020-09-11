@@ -8,13 +8,26 @@ module Spree
       class AdminAbility < PermissionSets::Base
 
         def activate!
-          can %i[admin update read display stock],
-            Spree::Product,
-            suppliers: { id: user.supplier_id }
-          
-          can %i[admin create],
+          can :manage,
+              Spree.user_class,
+              supplier_id: user.supplier_id
+
+          can :update_email,
+              Spree.user_class
+
+          can :manage, :api_key
+
+          can :manage,
+              Spree::Role,
+              name: ['supplier_admin', 'supplier_staff']
+
+          cannot %i[read],
               Spree::Product
           
+          can %i[admin create update read display stock],
+              Spree::Product,
+              suppliers: { id: user.supplier_id }
+
           can %i[admin create update destroy display],
               Spree::Variant
 
@@ -54,7 +67,7 @@ module Spree
                 }
               }
 
-          can %i[admin create read update display],
+          can %i[admin read update display],
               Spree::Supplier,
               id: user.supplier_id
 

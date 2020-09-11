@@ -27,7 +27,7 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
     end
   end
 
-  xcontext 'for Product' do
+  context 'for Product' do
     let(:resource) { create(:product) }
 
     before(:each) do
@@ -45,7 +45,7 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
         product.add_supplier!(create(:supplier))
         product
       }
-      xit { expect(ability).to_not be_able_to :read, other_resource }
+      it { expect(ability).to_not be_able_to :read, other_resource }
     end
 
     context 'requested by suppliers user' do
@@ -78,14 +78,13 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
     end
 
     context 'requested by suppliers user' do
-      xcontext 'when order is complete' do
+      context 'when order is complete' do
         let(:resource) do
           order = create(:completed_order_from_supplier_with_totals)
           order.stock_locations.first.update_attribute :supplier, user.supplier
           Spree::Shipment.new({order: order, stock_location: order.stock_locations.first })
         end
 
-        it_should_behave_like 'read only'
         it_should_behave_like 'index allowed'
         it_should_behave_like 'admin granted'
       end
@@ -104,13 +103,13 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
     end
   end
 
-  xcontext 'for StockItem' do
+  context 'for StockItem' do
     let(:resource) { Spree::StockItem }
 
     it_should_behave_like 'index allowed'
     it_should_behave_like 'admin granted'
 
-    xcontext 'requested by another suppliers user' do
+    context 'requested by another suppliers user' do
       let(:resource) {
         supplier = create(:supplier)
         variant = create(:product).master
@@ -130,7 +129,7 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
     end
   end
 
-  xcontext 'for StockLocation' do
+  context 'for StockLocation' do
     context 'requsted by another suppliers user' do
       let(:resource) {
         supplier = create(:supplier)
@@ -141,7 +140,7 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
       it_should_behave_like 'access denied'
     end
 
-    xcontext 'requested by suppliers user' do
+    context 'requested by suppliers user' do
       let(:resource) {
         variant = create(:product).master
         variant.product.add_supplier! user.supplier
@@ -154,7 +153,7 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
     end
   end
 
-  xcontext 'for StockMovement' do
+  context 'for StockMovement' do
     let(:resource) { Spree::StockMovement }
 
     it_should_behave_like 'index allowed'
@@ -187,15 +186,17 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
       let(:ability) { Spree::Ability.new(user) }
       let(:resource) { create(:supplier) }
 
-      it_should_behave_like 'admin denied'
-      it_should_behave_like 'access denied'
+      it { expect(ability).to_not be_able_to :index, resource }
+      it { expect(ability).to_not be_able_to :create, resource }
     end
 
-    xcontext 'requested by suppliers user' do
+    context 'requested by suppliers user' do
       let(:resource) { user.supplier }
 
-      it_should_behave_like 'admin granted'
-      it_should_behave_like 'access granted'
+      it { expect(ability).to be_able_to :admin, resource }
+      it { expect(ability).to be_able_to :read, resource }
+      it { expect(ability).to be_able_to :update, resource }
+      it { expect(ability).to be_able_to :display, resource }
     end
   end
 end
