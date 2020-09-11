@@ -16,3 +16,4 @@ pkg
 *.swp
 spec/dummy
 spec/vcr_cassettes
+spec/examples.txt

@@ -24,23 +24,23 @@ module Spree
           cannot %i[read],
               Spree::Product
           
-          can %i[admin create update read display stock],
+          can %i[admin create update read stock],
               Spree::Product,
               suppliers: { id: user.supplier_id }
 
-          can %i[admin create update destroy display],
+          can %i[admin create update destroy read],
               Spree::Variant
 
-          can %i[admin display index update edit],
+          can %i[admin read index update edit],
               Spree::Shipment,
               order: { state: 'complete' },
               stock_location: { supplier_id: user.supplier_id }
 
-          can %i[admin display],
+          can %i[admin read],
               Spree::ReturnAuthorization,
               stock_location: { supplier_id: user.supplier_id }
 
-          can %i[admin display],
+          can %i[admin read],
               Spree::CustomerReturn,
               stock_location: { supplier_id: user.supplier_id }
 
@@ -54,7 +54,7 @@ module Spree
           cannot :read,
               Spree::StockLocation
 
-          can %i[admin manage create],
+          can %i[admin manage create update],
               Spree::StockLocation,
               supplier_id: user.supplier_id,
               active: true
@@ -67,17 +67,17 @@ module Spree
                 }
               }
 
-          can %i[admin read update display],
+          can %i[admin read update],
               Spree::Supplier,
               id: user.supplier_id
 
           cannot %i[create index],
               Spree::Supplier
 
-          can %i[display admin sales_total],
+          can %i[read admin sales_total],
               :reports
 
-          can %i[admin index edit update cancel show cart resend fire approve],
+          can %i[admin index edit update cancel read cart resend fire approve],
               Spree::Order,
               stock_locations: { supplier_id: user.supplier_id }
 

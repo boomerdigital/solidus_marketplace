@@ -8,40 +8,29 @@ module Spree
       class StaffAbility < PermissionSets::Base
 
         def activate!
-          can %i[admin update read display stock],
+          cannot %i[read], 
+              Spree::Product
+
+          can %i[read admin edit],
               Spree::Product,
               suppliers: { id: user.supplier_id }
 
-          can %i[admin create],
-              Spree::Product
+          can %i[admin manage],
+              Spree::StockItem,
+              stock_location_id: supplier_stock_location_ids
 
-          can %i[admin create update destroy display],
-              Spree::Variant
+          cannot %i[read], 
+              Spree::StockLocation
 
-          can %i[admin display index update edit],
-              Spree::Shipment,
-              order: { state: 'complete' },
-              stock_location: { supplier_id: user.supplier_id }
+          can :read,
+              Spree::StockLocation,
+              id: supplier_stock_location_ids
+        end
 
-          can %i[admin display],
-              Spree::ReturnAuthorization,
-              stock_location: { supplier_id: user.supplier_id }
+        private
 
-          can %i[admin display],
-              Spree::CustomerReturn,
-              stock_location: { supplier_id: user.supplier_id }
-
-          can %i[admin index edit update cancel show cart resend fire approve],
-              Spree::Order,
-              stock_locations: { supplier_id: user.supplier_id }
-
-          can %i[admin manage create],
-              Spree::Image
-
-          if defined?(Spree::SalePrice)
-            can %i[admin manage create update],
-                Spree::SalePrice
-          end
+        def supplier_stock_location_ids
+          @ids ||= user.supplier.stock_locations.pluck(:id)
         end
       end
     end

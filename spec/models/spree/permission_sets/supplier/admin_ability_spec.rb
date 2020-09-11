@@ -15,6 +15,7 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
 
   before(:each) do
     user.spree_roles << supplier_admin_role
+    described_class.new(ability).activate!
   end
 
   context 'for Dash' do
@@ -147,9 +148,12 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
         user.supplier.stock_locations.first
       }
 
-      it_should_behave_like 'access granted'
-      it_should_behave_like 'admin granted'
-      it_should_behave_like 'index allowed'
+      it { expect(ability).to be_able_to :admin, resource }
+      it { expect(ability).to be_able_to :read, resource }
+      it { expect(ability).to be_able_to :update, resource }
+      it { expect(ability).to be_able_to :index, resource }
+      it { expect(ability).to be_able_to :create, resource }
+      it { expect(ability).to be_able_to :edit, resource }
     end
   end
 
@@ -196,7 +200,6 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
       it { expect(ability).to be_able_to :admin, resource }
       it { expect(ability).to be_able_to :read, resource }
       it { expect(ability).to be_able_to :update, resource }
-      it { expect(ability).to be_able_to :display, resource }
     end
   end
 end
