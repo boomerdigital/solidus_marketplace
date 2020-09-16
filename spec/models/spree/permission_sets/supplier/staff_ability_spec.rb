@@ -10,6 +10,9 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
   let(:supplier_staff_role) { build(:role, name: 'supplier_staff') }
   let(:user) { create(:user, supplier: supplier) }
   let(:token) { nil }
+  let(:product) { create(:product) }
+  let(:variant) { product.master }
+  let(:other_supplier) { create(:supplier) }
 
   subject { ability }
 
@@ -51,21 +54,24 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
 
     context 'requested by another suppliers user' do
       let(:resource) {
-        supplier = create(:supplier)
-        variant = create(:product).master
-        variant.product.add_supplier! supplier
-        supplier.stock_locations.first.stock_items.first
+        other_supplier.stock_locations.first.stock_items.first
       }
+
+      before do
+        variant.product.add_supplier! other_supplier
+      end
       
       it { expect(ability).to_not be_able_to :admin, resource }
     end
 
     context 'requested by suppliers user' do
       let(:resource) {
-        variant = create(:product).master
-        variant.product.add_supplier! user.supplier
         user.supplier.stock_locations.first.stock_items.first
       }
+
+      before do
+        variant.product.add_supplier! user.supplier
+      end
 
       it { expect(ability).to be_able_to :admin, resource }
     end
@@ -74,21 +80,24 @@ describe Spree::PermissionSets::Supplier::AdminAbility do
   context 'for StockLocation' do
     context 'requested by another suppliers user' do
       let(:resource) {
-        supplier = create(:supplier)
-        variant = create(:product).master
-        variant.product.add_supplier! supplier
-        supplier.stock_locations.first
+        other_supplier.stock_locations.first
       }
+
+      before do
+        variant.product.add_supplier! other_supplier
+      end
 
       it { expect(ability).to_not be_able_to :read, resource }
     end
 
     context 'requested by suppliers user' do
       let(:resource) {
-        variant = create(:product).master
-        variant.product.add_supplier! user.supplier
         user.supplier.stock_locations.first
       }
+
+      before do
+        variant.product.add_supplier! user.supplier
+      end
 
       it { expect(ability).to be_able_to :read, resource }
     end
