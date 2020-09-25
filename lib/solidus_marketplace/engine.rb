@@ -24,7 +24,8 @@ module SolidusMarketplace
     initializer 'solidus_marketplace.preferences', before: :load_config_initializers  do |app|
       SolidusMarketplace::Config = SolidusMarketplace::Configuration.new
       Spree::PermittedAttributes.singleton_class.prepend(SolidusMarketplace::PermittedAttributes)
-      Spree::Config.roles.assign_permissions :supplier_admin, ['Spree::PermissionSets::SupplierAbility']
+      Spree::Config.roles.assign_permissions :supplier_admin, ['Spree::PermissionSets::Supplier::AdminAbility']
+      Spree::Config.roles.assign_permissions :supplier_staff, ['Spree::PermissionSets::Supplier::StaffAbility', 'Spree::PermissionSets::OrderManagement']
     end
 
     initializer 'solidus_marketplace' do

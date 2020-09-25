@@ -22,14 +22,16 @@
           <% end %>
         </div>
 
-        <div data-hook='admin_supplier_form_user_admin'>
-          <%= f.field_container :user do %>
-            <%= f.label :user_admin %>
-            <%= hidden_field_tag 'supplier[admin_id]',
-                                 f.object.user_ids.join(','),
-                                 class: 'user_picker fullwidth' %>
-          <% end %>
-        </div>
+        <% if try_spree_current_user.has_admin_role? %>
+          <div data-hook='admin_supplier_form_commission_users'>
+            <%= f.field_container :admins do %>
+              <%= f.label :admins %>
+              <%= hidden_field_tag 'supplier[admin_ids_string]',
+                                   f.object.admin_ids.join(','),
+                                   class: 'user_picker fullwidth' %>
+            <% end %>
+          </div>
+        <% end %>
 
         <div data-hook='admin_supplier_form_paypal_email'>
           <%= f.field_container :paypal_email do %>
@@ -64,15 +66,6 @@
             <%= f.field_container :commission_percentage do %>
               <%= f.label Spree::Supplier.human_attribute_name(:commission_percentage) %>
               <%= f.text_field :commission_percentage, class: 'fullwidth' %>
-            <% end %>
-          </div>
-
-          <div data-hook='admin_supplier_form_commission_users'>
-            <%= f.field_container :users do %>
-              <%= f.label :users %>
-              <%= hidden_field_tag 'supplier[user_ids_string]',
-                                   f.object.user_ids.join(','),
-                                   class: 'user_picker fullwidth' %>
             <% end %>
           </div>
 

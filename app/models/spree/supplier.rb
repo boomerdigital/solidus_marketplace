@@ -7,8 +7,6 @@ module Spree
 
     attr_accessor :password, :password_confirmation
 
-    belongs_to :user, class_name: Spree.user_class.to_s, optional: true
-    belongs_to :admin, class_name: Spree.user_class.to_s, optional: true
     belongs_to :address, class_name: 'Spree::Address'
     accepts_nested_attributes_for :address
 
@@ -22,7 +20,6 @@ module Spree
     has_many :products, through: :variants
     has_many :stock_locations, dependent: :destroy
     has_many :shipments, through: :stock_locations
-    has_many :users, class_name: Spree.user_class.to_s
     has_many :admins, class_name: Spree.user_class.to_s
     accepts_nested_attributes_for :admins
 
@@ -34,7 +31,6 @@ module Spree
     before_validation :check_url
 
     before_create :set_commission
-    after_create :assign_user
     after_create :create_stock_location
     after_create :send_welcome, if: -> { SolidusMarketplace::Config[:send_supplier_email] }
 
@@ -46,16 +42,8 @@ module Spree
       deleted_at.present?
     end
 
-    def user_ids_string
-      user_ids.join(',')
-    end
-
     def admin_ids_string
       admin_ids.join(',')
-    end
-
-    def user_ids_string=(user_ids)
-      self.user_ids = user_ids.to_s.split(',').map(&:strip)
     end
 
     def admin_ids_string=(admin_ids)
@@ -69,14 +57,6 @@ module Spree
     end
 
     protected
-
-    def assign_user
-      if self.users.empty?
-        self.users << self.admin if self.admin
-        self.users << self.user if self.users.blank?
-        self.save
-      end
-    end
 
     def check_url
       unless self.url.blank? or self.url =~ URI::regexp(%w(http https))

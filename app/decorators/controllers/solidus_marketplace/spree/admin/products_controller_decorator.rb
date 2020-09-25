@@ -64,7 +64,7 @@ module SolidusMarketplace
         end
 
         def get_suppliers
-          @suppliers = Spree::Supplier.order(:name)
+          @suppliers = ::Spree::Supplier.order(:name)
         end
 
         # Scopes the collection to what the user should have access to, based on the user's role

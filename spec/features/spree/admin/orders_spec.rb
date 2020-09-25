@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe 'Admin - Orders', type: :feature do
-  let!(:user) { create(:supplier_user) }
+  let!(:user) { create(:user) }
 
   it 'Supplier should not be authorized' do
     visit spree.root_path
