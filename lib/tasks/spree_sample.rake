@@ -45,7 +45,7 @@ namespace :spree_sample do
       supplier = Spree::Supplier.new(name: name,
                                      user_id: user.id,
                                      url: 'http://example.com',
-                                     admin: user)
+                                     admins: [user])
       supplier.build_address(firstname: name,
                              lastname: name,
                              address1: '100 State St',
