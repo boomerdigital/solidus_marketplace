@@ -21,8 +21,8 @@ module SolidusMarketplace
         :slug,
         :paypal_email
       ]
-
-      mattr_reader(:supplier_attributes)
     end
+
+    mattr_reader(:supplier_attributes)
   end
 end
