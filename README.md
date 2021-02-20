@@ -29,7 +29,7 @@ $ bundle exec rails g solidus_marketplace:install
 (Optional) If you want to be able to see the reports, please add this line to your `Gemfile`:
 
 ```ruby
-gem 'solidus_reports', github: 'solidus-contrib/solidus_reports'
+gem 'solidus_reports', github: 'solidusio-contrib/solidus_reports'
 ```
 
 (Optional) If you want to use Stripe or other payment providers, please add this line to your `Gemfile`:
